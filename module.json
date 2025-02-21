@@ -27,6 +27,7 @@
     ]
   },
   "esmodules": [
+    "scripts/setup.js",
     "scripts/psionicist.js",
     "scripts/powers.js",
     "scripts/wildtalents.js"

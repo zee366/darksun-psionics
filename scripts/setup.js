@@ -24,7 +24,7 @@ Hooks.once("ready", async () => {
     }
     psionicistData = await response.json();
     console.log("Loaded psionicist.json data:", psionicistData.map(d => ({ _id: d._id, name: d.name })));
-    await Item.createDocuments(psionicistData, { pack: packKey, keepId: true }); // Still populate compendium for visibility
+    await Item.createDocuments(psionicistData, { pack: packKey, keepId: true });
     console.log("Psionicist pack populated with data! Index size:", pack.index.size);
   } else {
     const response = await fetch("./modules/darksun-psionics/packs/psionicist.json");
@@ -81,19 +81,20 @@ Hooks.on("createItem", async (item, options, userId) => {
         await actor.createEmbeddedDocuments("Item", [subclass]);
         console.log(`Added ${subclass.name} subclass to ${actor.name}`);
         const subclassItem = actor.items.getName(subclass.name);
-        console.log("Subclass advancements:", subclassItem.system.advancement);
+        console.log("Subclass advancements:", JSON.stringify(subclassItem.system.advancement, null, 2));
         const advancements = subclassItem.system.advancement.filter(a => a.type === "ItemGrant" && a.level <= level);
-        console.log("Advancements to apply:", advancements);
+        console.log("Advancements to apply:", JSON.stringify(advancements, null, 2));
         const itemsToGrant = advancements.flatMap(a => a.configuration.items);
         console.log("Items to grant:", itemsToGrant);
         if (itemsToGrant.length > 0) {
-          const items = psionicistData.filter(i => itemsToGrant.includes(i._id));
-          console.log("Items from JSON:", items.map(i => i.name));
+          const items = psionicistData.filter(i => itemsToGrant.some(id => id === i._id));
+          console.log("Items from JSON (raw IDs):", items.map(i => ({ _id: i._id, name: i.name })));
           if (items.length > 0) {
             await actor.createEmbeddedDocuments("Item", items);
             console.log(`Granted ${items.length} initial items for ${subclass.name}`);
           } else {
-            console.log("No items found in JSON data for granted IDs.");
+            console.log("No items found in JSON data for granted IDs:", itemsToGrant);
+            console.log("Full psionicistData IDs:", psionicistData.map(d => d._id));
           }
         } else {
           console.log("No initial items found to grant.");
@@ -116,22 +117,23 @@ Hooks.on("updateItem", async (item, updateData, options, userId) => {
 
     const subclass = actor.items.find(i => i.type === "subclass" && i.system.classIdentifier === "psionicist");
     if (subclass) {
-      console.log("Subclass advancements:", subclass.system.advancement);
+      console.log("Subclass advancements:", JSON.stringify(subclass.system.advancement, null, 2));
       const advancements = subclass.system.advancement.filter(a => a.type === "ItemGrant" && a.level <= newLevel);
-      console.log("Advancements to apply:", advancements);
+      console.log("Advancements to apply:", JSON.stringify(advancements, null, 2));
       const itemsToGrant = advancements.flatMap(a => a.configuration.items);
       console.log("Items to grant:", itemsToGrant);
       const existingItems = actor.items.filter(i => i.type === "feat").map(i => i._id);
       const itemsToAdd = itemsToGrant.filter(id => !existingItems.includes(id));
       console.log("Items to add (filtered):", itemsToAdd);
       if (itemsToAdd.length > 0) {
-        const items = psionicistData.filter(i => itemsToAdd.includes(i._id));
-        console.log("Items from JSON:", items.map(i => i.name));
+        const items = psionicistData.filter(i => itemsToAdd.some(id => id === i._id));
+        console.log("Items from JSON (raw IDs):", items.map(i => ({ _id: i._id, name: i.name })));
         if (items.length > 0) {
           await actor.createEmbeddedDocuments("Item", items);
           console.log(`Granted ${items.length} new items for ${subclass.name} up to level ${newLevel}`);
         } else {
-          console.log("No items found in JSON data for granted IDs.");
+          console.log("No items found in JSON data for granted IDs:", itemsToAdd);
+          console.log("Full psionicistData IDs:", psionicistData.map(d => d._id));
         }
       } else {
         console.log(`No new items to grant for ${subclass.name} at level ${newLevel}`);

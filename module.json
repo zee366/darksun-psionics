@@ -12,10 +12,20 @@
   ],
   "compatibility": {
     "minimum": "12",
-    "verified": "12"
+    "verified": "12.331"
   },
-  "systems": ["dnd5e"],
-  "minimumSystemVersion": "4.0.0",
+  "relationships": {
+    "systems": [
+      {
+        "id": "dnd5e",
+        "type": "system",
+        "compatibility": {
+          "minimum": "4.0.0",
+          "verified": "4.3.0"
+        }
+      }
+    ]
+  },
   "esmodules": [
     "scripts/psionicist.js",
     "scripts/powers.js",
@@ -28,21 +38,33 @@
       "label": "Psionicist Class",
       "path": "packs/psionicist.json",
       "type": "Item",
-      "system": "dnd5e"
+      "system": "dnd5e",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
     },
     {
       "name": "powers",
       "label": "Psionic Powers",
       "path": "packs/powers.json",
       "type": "Item",
-      "system": "dnd5e"
+      "system": "dnd5e",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
     },
     {
       "name": "wildtalents",
       "label": "Wild Talents",
       "path": "packs/wildtalents.json",
       "type": "Item",
-      "system": "dnd5e"
+      "system": "dnd5e",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
     }
   ],
   "languages": [

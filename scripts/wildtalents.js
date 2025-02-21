@@ -1,1 +1,1 @@
-console.log("wildtalents.js loaded");
+Hooks.once("init", () => console.log("Wild Talents init"));

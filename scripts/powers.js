@@ -1,1 +1,1 @@
-console.log("power.js loaded");
+Hooks.once("init", () => console.log("Powers init"));

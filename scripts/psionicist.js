@@ -1,1 +1,1 @@
-Hooks.once("init", () => console.log("Psionics init"));
+Hooks.once("init", () => console.log("Psionicist init"));

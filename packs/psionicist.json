@@ -107,7 +107,7 @@
       "classIdentifier": "psionicist",
       "advancement": [
         {
-          "_id": "psychokinFeat01",
+          "_id": "psychokinFeat012",
           "type": "ItemGrant",
           "configuration": {
             "items": ["psychokinFeat123"],
@@ -132,7 +132,7 @@
       "classIdentifier": "psionicist",
       "advancement": [
         {
-          "_id": "clairsentFeat01",
+          "_id": "clairsentFeat012",
           "type": "ItemGrant",
           "configuration": {
             "items": ["clairsentFeat123"],
@@ -157,7 +157,7 @@
       "classIdentifier": "psionicist",
       "advancement": [
         {
-          "_id": "metapsionFeat01",
+          "_id": "metapsionFeat012",
           "type": "ItemGrant",
           "configuration": {
             "items": ["metapsionFeat123"],

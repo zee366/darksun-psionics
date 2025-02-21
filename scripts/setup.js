@@ -40,29 +40,40 @@ Hooks.once("ready", async () => {
         }
       });
       console.log(`Set Power Points to ${powerPoints} for ${actor.name}`);
-      if (actor.sheet) actor.sheet.render(true); // Ensure sheet updates
+      if (actor.sheet) actor.sheet.render(true);
+    }
+  });
+  
+  Hooks.on("updateItem", async (item, updateData, options, userId) => {
+    if (item.type === "class" && item.name === "Psionicist" && item.parent && updateData.system?.levels) {
+      const actor = item.parent;
+      const newLevel = updateData.system.levels;
+      const powerPoints = item.system.advancement.find(a => a.type === "Resource")?.configuration.value[newLevel] || 2;
+      await actor.update({
+        "system.resources.primary.max": powerPoints,
+        "system.resources.primary.value": powerPoints // Reset to max; adjust if you want to preserve current value
+      });
+      console.log(`Updated Power Points to ${powerPoints} for ${actor.name} at level ${newLevel}`);
+      if (actor.sheet) actor.sheet.render(true);
     }
   });
   
   Hooks.on("renderActorSheet", (sheet, html) => {
-    if (sheet.constructor.name !== "ActorSheet5eCharacter") return; // Target Default sheet only
+    if (sheet.constructor.name !== "ActorSheet5eCharacter") return; // Default sheet only
     const actor = sheet.actor;
     if (actor.classes.psionicist) {
       const powerPoints = actor.system.resources.primary;
       if (powerPoints.label === "Power Points") {
-        // Find or create a resources section
         let resources = html.find(".resources");
         if (!resources.length) {
           resources = $('<div class="resources flexrow"></div>');
-          // Insert into the attributes section (adjust selector as needed)
           const attributes = html.find(".attributes");
           if (attributes.length) {
             attributes.append(resources);
           } else {
-            html.find(".center-pane").append(resources); // Fallback
+            html.find(".center-pane").append(resources);
           }
         }
-        // Add Power Points display
         resources.html(`
           <div class="resource flex-group-center">
             <label>Power Points</label>

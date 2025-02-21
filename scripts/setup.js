@@ -86,6 +86,7 @@ Hooks.on("createItem", async (item, options, userId) => {
         console.log("Advancements to apply:", JSON.stringify(advancements, null, 2));
         const itemsToGrant = advancements.flatMap(a => a.configuration.items);
         console.log("Items to grant:", itemsToGrant);
+        console.log("psionicist data: ", psionicistData);
         if (itemsToGrant.length > 0) {
           const items = psionicistData.filter(i => itemsToGrant.some(id => id === i._id));
           console.log("Items from JSON (raw IDs):", items.map(i => ({ _id: i._id, name: i.name })));

@@ -1,54 +1,61 @@
 {
   "id": "darksun-psionics",
   "title": "Dark Sun Psionics",
-  "description": "Psionics and Psionicist class for D&D 5e, Dark Sun style.",
-  "version": "1.0.0",
-  "compatibility": {
-    "minimum": "11",
-    "verified": "11"
-  },
-  "relationships": {
-    "systems": [
-      {
-        "id": "dnd5e",
-        "type": "system",
-        "compatibility": {
-          "minimum": "3",
-          "verified": "3"
-        }
-      }
-    ]
-  },
-  "languages": [
+  "description": "A module for Foundry VTT that adds psionics from AD&D 2nd Edition's Dark Sun setting to D&D 5th Edition, including the Psionicist class, psionic powers, and Wild Talents.",
+  "version": "0.1.0",
+  "authors": [
     {
-      "lang": "en",
-      "name": "English",
-      "path": "lang/en.json",
-      "flags": {}
+      "name": "Jason Brennan",
+      "email": "<your-email@example.com>",
+      "discord": "<your-discord-handle>"
     }
   ],
-  "scripts": [
+  "compatibility": {
+    "minimum": "10",
+    "verified": "11",
+    "maximum": "11"
+  },
+  "systems": ["dnd5e"],
+  "minimumSystemVersion": "3.0.0",
+  "esmodules": [
     "scripts/psionicist.js",
     "scripts/powers.js",
     "scripts/wildtalents.js"
   ],
+  "styles": [],
   "packs": [
     {
       "name": "psionicist",
       "label": "Psionicist Class",
       "path": "packs/psionicist.json",
-      "type": "Item"
+      "type": "Item",
+      "system": "dnd5e"
     },
     {
       "name": "powers",
       "label": "Psionic Powers",
       "path": "packs/powers.json",
-      "type": "Item"
+      "type": "Item",
+      "system": "dnd5e"
     },
     {
       "name": "wildtalents",
       "label": "Wild Talents",
       "path": "packs/wildtalents.json",
-      "type": "Item"}
-  ]
+      "type": "Item",
+      "system": "dnd5e"
+    }
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "url": "https://github.com/zee366/darksun-psionics",
+  "manifest": "https://raw.githubusercontent.com/zee366/darksun-psionics/main/module.json",
+  "download": "https://github.com/zee366/darksun-psionics/archive/refs/heads/main.zip",
+  "license": "GPL",
+  "readme": "README.md"
 }

@@ -1,4 +1,4 @@
-let compendiumItems = null; // Cache for compendium items
+let psionicistData = null; // Cache JSON data
 
 Hooks.once("ready", async () => {
   const packKey = "darksun-psionics.psionicist";
@@ -22,18 +22,18 @@ Hooks.once("ready", async () => {
       console.error("Failed to fetch psionicist.json:", response.statusText);
       return;
     }
-    const data = await response.json();
-    console.log("JSON data to import:", data.map(d => ({ _id: d._id, name: d.name })));
-    await Item.createDocuments(data, { pack: packKey, keepId: true });
-    await pack.getIndex({ force: true });
+    psionicistData = await response.json();
+    console.log("Loaded psionicist.json data:", psionicistData.map(d => ({ _id: d._id, name: d.name })));
+    await Item.createDocuments(psionicistData, { pack: packKey, keepId: true }); // Still populate compendium for visibility
     console.log("Psionicist pack populated with data! Index size:", pack.index.size);
-    console.log("Imported items:", pack.index.map(i => ({ _id: i._id, name: i.name })));
-    compendiumItems = await pack.getDocuments(); // Cache all items
-    console.log("Cached compendium items:", compendiumItems.map(i => i.name));
   } else {
-    console.log("Compendium already populated. Index size:", pack.index.size);
-    compendiumItems = await pack.getDocuments();
-    console.log("Cached existing compendium items:", compendiumItems.map(i => i.name));
+    const response = await fetch("./modules/darksun-psionics/packs/psionicist.json");
+    if (!response.ok) {
+      console.error("Failed to fetch psionicist.json for cache:", response.statusText);
+      return;
+    }
+    psionicistData = await response.json();
+    console.log("Loaded psionicist.json data from populated compendium:", psionicistData.map(d => ({ _id: d._id, name: d.name })));
   }
 });
 
@@ -53,11 +53,11 @@ Hooks.on("createItem", async (item, options, userId) => {
     });
     console.log(`Set Power Points to ${powerPoints} for ${actor.name}`);
 
-    const pack = game.packs.get("darksun-psionics.psionicist");
-    await pack.getIndex({ force: true });
-    console.log("Pack index in createItem:", pack.index.map(i => i.name));
-    const subclasses = await pack.getDocuments();
-    const subclassOptions = subclasses.filter(s => s.type === "subclass" && s.system.classIdentifier === "psionicist");
+    if (!psionicistData) {
+      console.error("psionicist.json data not loaded yet!");
+      return;
+    }
+    const subclasses = psionicistData.filter(s => s.type === "subclass" && s.system.classIdentifier === "psionicist");
     if (!actor.items.find(i => i.type === "subclass" && i.system.classIdentifier === "psionicist")) {
       const choice = await new Promise(resolve => {
         new Dialog({
@@ -65,7 +65,7 @@ Hooks.on("createItem", async (item, options, userId) => {
           content: `
             <p>Select your Psionic Discipline:</p>
             <select id="subclass">
-              ${subclassOptions.map(s => `<option value="${s._id}">${s.name}</option>`).join("")}
+              ${subclasses.map(s => `<option value="${s._id}">${s.name}</option>`).join("")}
             </select>
           `,
           buttons: {
@@ -76,9 +76,9 @@ Hooks.on("createItem", async (item, options, userId) => {
           }
         }).render(true);
       });
-      const subclass = subclassOptions.find(s => s._id === choice);
+      const subclass = subclasses.find(s => s._id === choice);
       if (subclass) {
-        await actor.createEmbeddedDocuments("Item", [subclass.toObject()]);
+        await actor.createEmbeddedDocuments("Item", [subclass]);
         console.log(`Added ${subclass.name} subclass to ${actor.name}`);
         const subclassItem = actor.items.getName(subclass.name);
         console.log("Subclass advancements:", subclassItem.system.advancement);
@@ -87,21 +87,13 @@ Hooks.on("createItem", async (item, options, userId) => {
         const itemsToGrant = advancements.flatMap(a => a.configuration.items);
         console.log("Items to grant:", itemsToGrant);
         if (itemsToGrant.length > 0) {
-          let items = compendiumItems.filter(i => itemsToGrant.includes(i._id)); // Use cached items
-          if (!items.length) {
-            console.log("Cache missed, falling back to fetch...");
-            items = [];
-            for (const id of itemsToGrant) {
-              const item = await pack.getDocument(id);
-              if (item) items.push(item);
-            }
-          }
-          console.log("Fetched/Cached items:", items.map(i => i.name));
+          const items = psionicistData.filter(i => itemsToGrant.includes(i._id));
+          console.log("Items from JSON:", items.map(i => i.name));
           if (items.length > 0) {
-            await actor.createEmbeddedDocuments("Item", items.map(i => i.toObject()));
+            await actor.createEmbeddedDocuments("Item", items);
             console.log(`Granted ${items.length} initial items for ${subclass.name}`);
           } else {
-            console.log("No items fetched despite valid IDs.");
+            console.log("No items found in JSON data for granted IDs.");
           }
         } else {
           console.log("No initial items found to grant.");
@@ -129,28 +121,17 @@ Hooks.on("updateItem", async (item, updateData, options, userId) => {
       console.log("Advancements to apply:", advancements);
       const itemsToGrant = advancements.flatMap(a => a.configuration.items);
       console.log("Items to grant:", itemsToGrant);
-      const existingItems = actor.items.filter(i => i.type === "feat").map(i => i.flags.core?.sourceId || i._id);
-      const itemsToAdd = itemsToGrant.filter(id => !existingItems.includes(`Compendium.darksun-psionics.psionicist.${id}`));
+      const existingItems = actor.items.filter(i => i.type === "feat").map(i => i._id);
+      const itemsToAdd = itemsToGrant.filter(id => !existingItems.includes(id));
       console.log("Items to add (filtered):", itemsToAdd);
       if (itemsToAdd.length > 0) {
-        const pack = game.packs.get("darksun-psionics.psionicist");
-        await pack.getIndex({ force: true });
-        console.log("Pack index in updateItem:", pack.index.map(i => i.name));
-        let items = compendiumItems.filter(i => itemsToAdd.includes(i._id)); // Use cached items
-        if (!items.length) {
-          console.log("Cache missed, falling back to fetch...");
-          items = [];
-          for (const id of itemsToAdd) {
-            const item = await pack.getDocument(id);
-            if (item) items.push(item);
-          }
-        }
-        console.log("Fetched/Cached items:", items.map(i => i.name));
+        const items = psionicistData.filter(i => itemsToAdd.includes(i._id));
+        console.log("Items from JSON:", items.map(i => i.name));
         if (items.length > 0) {
-          await actor.createEmbeddedDocuments("Item", items.map(i => i.toObject()));
+          await actor.createEmbeddedDocuments("Item", items);
           console.log(`Granted ${items.length} new items for ${subclass.name} up to level ${newLevel}`);
         } else {
-          console.log("No items fetched despite valid IDs.");
+          console.log("No items found in JSON data for granted IDs.");
         }
       } else {
         console.log(`No new items to grant for ${subclass.name} at level ${newLevel}`);

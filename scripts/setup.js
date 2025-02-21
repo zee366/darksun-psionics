@@ -40,6 +40,34 @@ Hooks.once("ready", async () => {
         }
       });
       console.log(`Set Power Points to ${powerPoints} for ${actor.name}`);
+  
+      // Prompt for subclass if none exists
+      const subclasses = await game.packs.get("darksun-psionics.psionicist").getDocuments();
+      const subclassOptions = subclasses.filter(s => s.type === "subclass" && s.system.classIdentifier === "psionicist");
+      if (!actor.items.find(i => i.type === "subclass" && i.system.classIdentifier === "psionicist")) {
+        const choice = await new Promise(resolve => {
+          new Dialog({
+            title: "Choose Psionic Discipline",
+            content: `
+              <p>Select your Psionic Discipline:</p>
+              <select id="subclass">
+                ${subclassOptions.map(s => `<option value="${s._id}">${s.name}</option>`).join("")}
+              </select>
+            `,
+            buttons: {
+              ok: {
+                label: "Confirm",
+                callback: html => resolve(html.find("#subclass").val())
+              }
+            }
+          }).render(true);
+        });
+        const subclass = subclassOptions.find(s => s._id === choice);
+        if (subclass) {
+          await actor.createEmbeddedDocuments("Item", [subclass.toObject()]);
+          console.log(`Added ${subclass.name} subclass to ${actor.name}`);
+        }
+      }
       if (actor.sheet) actor.sheet.render(true);
     }
   });
@@ -50,15 +78,15 @@ Hooks.once("ready", async () => {
       const newLevel = updateData.system.levels;
       const powerPoints = item.system.advancement.find(a => a.type === "Resource")?.configuration.value[newLevel] || 2;
       await actor.update({
-        "system.resources.primary.max": powerPoints,
+        "system.resources.primary.max": powerPoints
       });
-      console.log(`Updated Power Points to ${powerPoints} for ${actor.name} at level ${newLevel}`);
+      console.log(`Updated Power Points max to ${powerPoints} for ${actor.name} at level ${newLevel}`);
       if (actor.sheet) actor.sheet.render(true);
     }
   });
   
   Hooks.on("renderActorSheet", (sheet, html) => {
-    if (sheet.constructor.name !== "ActorSheet5eCharacter") return; // Default sheet only
+    if (sheet.constructor.name !== "ActorSheet5eCharacter") return;
     const actor = sheet.actor;
     if (actor.classes.psionicist) {
       const powerPoints = actor.system.resources.primary;
@@ -79,6 +107,12 @@ Hooks.once("ready", async () => {
             <input type="text" value="${powerPoints.value}/${powerPoints.max}" readonly>
           </div>
         `);
+  
+        // Display subclass
+        const subclass = actor.items.find(i => i.type === "subclass" && i.system.classIdentifier === "psionicist");
+        if (subclass) {
+          html.find(".class .item-name h4").append(` (${subclass.name})`);
+        }
       }
     }
   });

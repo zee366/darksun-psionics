@@ -88,7 +88,10 @@ Hooks.on("createItem", async (item, options, userId) => {
         console.log("Items to grant:", itemsToGrant);
         console.log("psionicist data: ", psionicistData);
         if (itemsToGrant.length > 0) {
-          const items = psionicistData.filter(i => itemsToGrant.some(id => id === i._id));
+          const items = psionicistData.filter(i => itemsToGrant.some(id => {
+            console.log(`comparing psionicist data id: ${i._id} to itemsToGrant ${id}`);
+            return id === i._id
+        }));
           console.log("Items from JSON (raw IDs):", items.map(i => ({ _id: i._id, name: i.name })));
           if (items.length > 0) {
             await actor.createEmbeddedDocuments("Item", items);

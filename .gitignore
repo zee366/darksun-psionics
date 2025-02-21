@@ -1,0 +1,33 @@
+# Foundry VTT specific
+Data/
+world/
+*.db
+
+# Node.js / JavaScript
+node_modules/
+*.log
+npm-debug.log
+yarn-error.log
+
+# Build and distribution
+dist/
+build/
+
+# Editor and OS files
+*.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode/          # Covers VS Code settings, launch configs, etc.
+.history/         # VS Code Local History extension
+*.code-workspace  # VS Code workspace files
+.idea/
+
+# Sensitive or local configs
+.env
+config.json
+secrets.json
+
+# Temporary files
+*.tmp
+*.bak

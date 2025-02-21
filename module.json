@@ -1,0 +1,54 @@
+{
+  "id": "darksun-psionics",
+  "title": "Dark Sun Psionics",
+  "description": "Psionics and Psionicist class for D&D 5e, Dark Sun style.",
+  "version": "1.0.0",
+  "compatibility": {
+    "minimum": "11",
+    "verified": "11"
+  },
+  "relationships": {
+    "systems": [
+      {
+        "id": "dnd5e",
+        "type": "system",
+        "compatibility": {
+          "minimum": "3",
+          "verified": "3"
+        }
+      }
+    ]
+  },
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json",
+      "flags": {}
+    }
+  ],
+  "scripts": [
+    "scripts/psionicist.js",
+    "scripts/powers.js",
+    "scripts/wildtalents.js"
+  ],
+  "packs": [
+    {
+      "name": "psionicist",
+      "label": "Psionicist Class",
+      "path": "packs/psionicist.json",
+      "type": "Item"
+    },
+    {
+      "name": "powers",
+      "label": "Psionic Powers",
+      "path": "packs/powers.json",
+      "type": "Item"
+    },
+    {
+      "name": "wildtalents",
+      "label": "Wild Talents",
+      "path": "packs/wildtalents.json",
+      "type": "Item"}
+  ]
+}

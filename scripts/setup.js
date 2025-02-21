@@ -41,7 +41,8 @@ Hooks.once("ready", async () => {
       });
       console.log(`Set Power Points to ${powerPoints} for ${actor.name}`);
   
-      const subclasses = await game.packs.get("darksun-psionics.psionicist").getDocuments();
+      const pack = game.packs.get("darksun-psionics.psionicist");
+      const subclasses = await pack.getDocuments();
       const subclassOptions = subclasses.filter(s => s.type === "subclass" && s.system.classIdentifier === "psionicist");
       if (!actor.items.find(i => i.type === "subclass" && i.system.classIdentifier === "psionicist")) {
         const choice = await new Promise(resolve => {
@@ -65,14 +66,20 @@ Hooks.once("ready", async () => {
         if (subclass) {
           await actor.createEmbeddedDocuments("Item", [subclass.toObject()]);
           console.log(`Added ${subclass.name} subclass to ${actor.name}`);
-          // Apply initial subclass features
           const subclassItem = actor.items.getName(subclass.name);
+          console.log("Subclass advancements:", subclassItem.system.advancement);
           const advancements = subclassItem.system.advancement.filter(a => a.type === "ItemGrant" && a.level <= level);
+          console.log("Advancements to apply:", advancements);
           const itemsToGrant = advancements.flatMap(a => a.configuration.items);
-          const pack = game.packs.get("darksun-psionics.psionicist");
-          const items = await pack.getDocuments({ _id: { $in: itemsToGrant } });
-          await actor.createEmbeddedDocuments("Item", items.map(i => i.toObject()));
-          console.log(`Granted ${items.length} initial items for ${subclass.name}`);
+          console.log("Items to grant:", itemsToGrant);
+          if (itemsToGrant.length > 0) {
+            const items = await pack.getDocuments({ _id: { $in: itemsToGrant } });
+            console.log("Fetched items:", items.map(i => i.name));
+            await actor.createEmbeddedDocuments("Item", items.map(i => i.toObject()));
+            console.log(`Granted ${items.length} initial items for ${subclass.name}`);
+          } else {
+            console.log("No initial items found to grant.");
+          }
         }
       }
       if (actor.sheet) actor.sheet.render(true);
@@ -89,16 +96,20 @@ Hooks.once("ready", async () => {
       });
       console.log(`Updated Power Points max to ${powerPoints} for ${actor.name} at level ${newLevel}`);
   
-      // Apply subclass advancements manually
       const subclass = actor.items.find(i => i.type === "subclass" && i.system.classIdentifier === "psionicist");
       if (subclass) {
+        console.log("Subclass advancements:", subclass.system.advancement);
         const advancements = subclass.system.advancement.filter(a => a.type === "ItemGrant" && a.level <= newLevel);
+        console.log("Advancements to apply:", advancements);
         const itemsToGrant = advancements.flatMap(a => a.configuration.items);
+        console.log("Items to grant:", itemsToGrant);
         const existingItems = actor.items.filter(i => i.type === "feat").map(i => i.flags.core?.sourceId || i._id);
         const itemsToAdd = itemsToGrant.filter(id => !existingItems.includes(`Compendium.darksun-psionics.psionicist.${id}`));
+        console.log("Items to add (filtered):", itemsToAdd);
         if (itemsToAdd.length > 0) {
           const pack = game.packs.get("darksun-psionics.psionicist");
           const items = await pack.getDocuments({ _id: { $in: itemsToAdd } });
+          console.log("Fetched items:", items.map(i => i.name));
           await actor.createEmbeddedDocuments("Item", items.map(i => i.toObject()));
           console.log(`Granted ${items.length} new items for ${subclass.name} up to level ${newLevel}`);
         } else {

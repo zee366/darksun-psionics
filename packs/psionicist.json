@@ -71,7 +71,7 @@
     }
   },
   {
-    "_id": "telepathySub001",
+    "_id": "telepathySub1234",
     "name": "Telepathy",
     "type": "subclass",
     "system": {
@@ -82,10 +82,10 @@
       "classIdentifier": "psionicist",
       "advancement": [
         {
-          "_id": "telepathyFeature1",
+          "_id": "telepathyFeat001",
           "type": "ItemGrant",
           "configuration": {
-            "items": ["telepathyFeature01"],
+            "items": ["telepathyFeat123"],
             "optional": false
           },
           "value": {},
@@ -96,7 +96,7 @@
     }
   },
   {
-    "_id": "psychokinSub001",
+    "_id": "psychokinSub123",
     "name": "Psychokinesis",
     "type": "subclass",
     "system": {
@@ -107,10 +107,10 @@
       "classIdentifier": "psionicist",
       "advancement": [
         {
-          "_id": "psychokinFeature1",
+          "_id": "psychokinFeat01",
           "type": "ItemGrant",
           "configuration": {
-            "items": ["psychokinFeature01"],
+            "items": ["psychokinFeat12"],
             "optional": false
           },
           "value": {},
@@ -121,7 +121,7 @@
     }
   },
   {
-    "_id": "clairsentSub001",
+    "_id": "clairsentSub123",
     "name": "Clairsentience",
     "type": "subclass",
     "system": {
@@ -132,10 +132,10 @@
       "classIdentifier": "psionicist",
       "advancement": [
         {
-          "_id": "clairsentFeature1",
+          "_id": "clairsentFeat01",
           "type": "ItemGrant",
           "configuration": {
-            "items": ["clairsentFeature01"],
+            "items": ["clairsentFeat12"],
             "optional": false
           },
           "value": {},
@@ -146,7 +146,7 @@
     }
   },
   {
-    "_id": "metapsionSub001",
+    "_id": "metapsionSub123",
     "name": "Metapsionics",
     "type": "subclass",
     "system": {
@@ -157,10 +157,10 @@
       "classIdentifier": "psionicist",
       "advancement": [
         {
-          "_id": "metapsionFeature1",
+          "_id": "metapsionFeat01",
           "type": "ItemGrant",
           "configuration": {
-            "items": ["metapsionFeature01"],
+            "items": ["metapsionFeat12"],
             "optional": false
           },
           "value": {},
@@ -171,7 +171,7 @@
     }
   },
   {
-    "_id": "telepathyFeature01",
+    "_id": "telepathyFeat123",
     "name": "Mind Link",
     "type": "feat",
     "system": {
@@ -181,7 +181,7 @@
     }
   },
   {
-    "_id": "psychokinFeature01",
+    "_id": "psychokinFeat12",
     "name": "Kinetic Push",
     "type": "feat",
     "system": {
@@ -191,7 +191,7 @@
     }
   },
   {
-    "_id": "clairsentFeature01",
+    "_id": "clairsentFeat12",
     "name": "Precognition",
     "type": "feat",
     "system": {
@@ -201,7 +201,7 @@
     }
   },
   {
-    "_id": "metapsionFeature01",
+    "_id": "metapsionFeat12",
     "name": "Psionic Amplification",
     "type": "feat",
     "system": {

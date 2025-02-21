@@ -23,8 +23,9 @@ Hooks.once("ready", async () => {
       const data = await response.json();
       console.log("JSON data to import:", data.map(d => ({ _id: d._id, name: d.name })));
       await Item.createDocuments(data, { pack: packKey, keepId: true });
+      await pack.getIndex({ force: true }); // Force reindex after import
       console.log("Psionicist pack populated with data! Index size:", pack.index.size);
-      console.log("Imported items:", pack.index.map(i => i.name));
+      console.log("Imported items:", pack.index.map(i => ({ _id: i._id, name: i.name })));
     } else {
       console.log("Compendium already populated. Index size:", pack.index.size);
     }
@@ -47,6 +48,7 @@ Hooks.once("ready", async () => {
       console.log(`Set Power Points to ${powerPoints} for ${actor.name}`);
   
       const pack = game.packs.get("darksun-psionics.psionicist");
+      await pack.getIndex({ force: true }); // Ensure index is current
       const subclasses = await pack.getDocuments();
       const subclassOptions = subclasses.filter(s => s.type === "subclass" && s.system.classIdentifier === "psionicist");
       if (!actor.items.find(i => i.type === "subclass" && i.system.classIdentifier === "psionicist")) {
@@ -78,10 +80,18 @@ Hooks.once("ready", async () => {
           const itemsToGrant = advancements.flatMap(a => a.configuration.items);
           console.log("Items to grant:", itemsToGrant);
           if (itemsToGrant.length > 0) {
-            const items = await pack.getDocuments({ _id: { $in: itemsToGrant } });
+            const items = [];
+            for (const id of itemsToGrant) {
+              const item = await pack.getDocument(id); // Fetch one-by-one as fallback
+              if (item) items.push(item);
+            }
             console.log("Fetched items:", items.map(i => i.name));
-            await actor.createEmbeddedDocuments("Item", items.map(i => i.toObject()));
-            console.log(`Granted ${items.length} initial items for ${subclass.name}`);
+            if (items.length > 0) {
+              await actor.createEmbeddedDocuments("Item", items.map(i => i.toObject()));
+              console.log(`Granted ${items.length} initial items for ${subclass.name}`);
+            } else {
+              console.log("No items fetched despite valid IDs.");
+            }
           } else {
             console.log("No initial items found to grant.");
           }
@@ -113,10 +123,19 @@ Hooks.once("ready", async () => {
         console.log("Items to add (filtered):", itemsToAdd);
         if (itemsToAdd.length > 0) {
           const pack = game.packs.get("darksun-psionics.psionicist");
-          const items = await pack.getDocuments({ _id: { $in: itemsToAdd } });
+          await pack.getIndex({ force: true }); // Ensure index is current
+          const items = [];
+          for (const id of itemsToAdd) {
+            const item = await pack.getDocument(id); // Fetch one-by-one as fallback
+            if (item) items.push(item);
+          }
           console.log("Fetched items:", items.map(i => i.name));
-          await actor.createEmbeddedDocuments("Item", items.map(i => i.toObject()));
-          console.log(`Granted ${items.length} new items for ${subclass.name} up to level ${newLevel}`);
+          if (items.length > 0) {
+            await actor.createEmbeddedDocuments("Item", items.map(i => i.toObject()));
+            console.log(`Granted ${items.length} new items for ${subclass.name} up to level ${newLevel}`);
+          } else {
+            console.log("No items fetched despite valid IDs.");
+          }
         } else {
           console.log(`No new items to grant for ${subclass.name} at level ${newLevel}`);
         }

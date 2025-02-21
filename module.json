@@ -12,11 +12,10 @@
   ],
   "compatibility": {
     "minimum": "12",
-    "verified": "12",
-    "maximum": "12"
+    "verified": "12"
   },
   "systems": ["dnd5e"],
-  "minimumSystemVersion": "3.0.0",
+  "minimumSystemVersion": "4.0.0",
   "esmodules": [
     "scripts/psionicist.js",
     "scripts/powers.js",

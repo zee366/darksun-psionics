@@ -51,7 +51,6 @@ Hooks.once("ready", async () => {
       const powerPoints = item.system.advancement.find(a => a.type === "Resource")?.configuration.value[newLevel] || 2;
       await actor.update({
         "system.resources.primary.max": powerPoints,
-        "system.resources.primary.value": powerPoints // Reset to max; adjust if you want to preserve current value
       });
       console.log(`Updated Power Points to ${powerPoints} for ${actor.name} at level ${newLevel}`);
       if (actor.sheet) actor.sheet.render(true);

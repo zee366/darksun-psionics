@@ -76,7 +76,7 @@
   ],
   "url": "https://github.com/zee366/darksun-psionics",
   "manifest": "https://raw.githubusercontent.com/zee366/darksun-psionics/dev/module.json",
-  "download": "https://github.com/zee366/darksun-psionics/archive/refs/heads/main.zip",
+  "download": "https://github.com/zee366/darksun-psionics/archive/refs/heads/dev.zip",
   "license": "GPL",
   "readme": "README.md"
 }

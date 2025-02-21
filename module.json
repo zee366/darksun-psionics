@@ -36,7 +36,7 @@
     {
       "name": "psionicist",
       "label": "Psionicist Class",
-      "path": "packs/psionicist.json",
+      "path": "./packs/psionicist.json",
       "type": "Item",
       "system": "dnd5e",
       "ownership": {
@@ -47,7 +47,7 @@
     {
       "name": "powers",
       "label": "Psionic Powers",
-      "path": "packs/powers.json",
+      "path": "./packs/powers.json",
       "type": "Item",
       "system": "dnd5e",
       "ownership": {
@@ -58,7 +58,7 @@
     {
       "name": "wildtalents",
       "label": "Wild Talents",
-      "path": "packs/wildtalents.json",
+      "path": "./packs/wildtalents.json",
       "type": "Item",
       "system": "dnd5e",
       "ownership": {

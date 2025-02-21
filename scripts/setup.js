@@ -40,5 +40,35 @@ Hooks.once("ready", async () => {
         }
       });
       console.log(`Set Power Points to ${powerPoints} for ${actor.name}`);
+      if (actor.sheet) actor.sheet.render(true); // Ensure sheet updates
+    }
+  });
+  
+  Hooks.on("renderActorSheet", (sheet, html) => {
+    if (sheet.constructor.name !== "ActorSheet5eCharacter") return; // Target Default sheet only
+    const actor = sheet.actor;
+    if (actor.classes.psionicist) {
+      const powerPoints = actor.system.resources.primary;
+      if (powerPoints.label === "Power Points") {
+        // Find or create a resources section
+        let resources = html.find(".resources");
+        if (!resources.length) {
+          resources = $('<div class="resources flexrow"></div>');
+          // Insert into the attributes section (adjust selector as needed)
+          const attributes = html.find(".attributes");
+          if (attributes.length) {
+            attributes.append(resources);
+          } else {
+            html.find(".center-pane").append(resources); // Fallback
+          }
+        }
+        // Add Power Points display
+        resources.html(`
+          <div class="resource flex-group-center">
+            <label>Power Points</label>
+            <input type="text" value="${powerPoints.value}/${powerPoints.max}" readonly>
+          </div>
+        `);
+      }
     }
   });

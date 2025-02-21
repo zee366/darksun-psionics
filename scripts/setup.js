@@ -1,9 +1,10 @@
 Hooks.once("ready", async () => {
-    let pack = game.packs.get("darksun-psionics.psionicist");
+    const packKey = "darksun-psionics.psionicist";
+    let pack = game.packs.get(packKey);
     if (!pack) {
       pack = await CompendiumCollection.createCompendium({
         metadata: {
-          id: "darksun-psionics.psionicist",
+          id: packKey,
           label: "Psionicist Class",
           type: "Item",
           system: "dnd5e",
@@ -20,8 +21,12 @@ Hooks.once("ready", async () => {
         return;
       }
       const data = await response.json();
-      await Item.createDocuments(data, { pack: "darksun-psionics.psionicist" });
-      console.log("Psionicist pack populated with data!");
+      console.log("JSON data to import:", data.map(d => ({ _id: d._id, name: d.name })));
+      await Item.createDocuments(data, { pack: packKey, keepId: true });
+      console.log("Psionicist pack populated with data! Index size:", pack.index.size);
+      console.log("Imported items:", pack.index.map(i => i.name));
+    } else {
+      console.log("Compendium already populated. Index size:", pack.index.size);
     }
   });
   

@@ -41,7 +41,6 @@ Hooks.once("ready", async () => {
       });
       console.log(`Set Power Points to ${powerPoints} for ${actor.name}`);
   
-      // Prompt for subclass if none exists
       const subclasses = await game.packs.get("darksun-psionics.psionicist").getDocuments();
       const subclassOptions = subclasses.filter(s => s.type === "subclass" && s.system.classIdentifier === "psionicist");
       if (!actor.items.find(i => i.type === "subclass" && i.system.classIdentifier === "psionicist")) {
@@ -66,6 +65,9 @@ Hooks.once("ready", async () => {
         if (subclass) {
           await actor.createEmbeddedDocuments("Item", [subclass.toObject()]);
           console.log(`Added ${subclass.name} subclass to ${actor.name}`);
+          // Apply initial subclass features (level 1)
+          const subclassItem = actor.items.getName(subclass.name);
+          await subclassItem.applyAdvancement({ level });
         }
       }
       if (actor.sheet) actor.sheet.render(true);
@@ -81,6 +83,13 @@ Hooks.once("ready", async () => {
         "system.resources.primary.max": powerPoints
       });
       console.log(`Updated Power Points max to ${powerPoints} for ${actor.name} at level ${newLevel}`);
+  
+      // Apply subclass advancements
+      const subclass = actor.items.find(i => i.type === "subclass" && i.system.classIdentifier === "psionicist");
+      if (subclass) {
+        await subclass.applyAdvancement({ level: newLevel });
+        console.log(`Applied advancements for ${subclass.name} up to level ${newLevel}`);
+      }
       if (actor.sheet) actor.sheet.render(true);
     }
   });
@@ -108,7 +117,6 @@ Hooks.once("ready", async () => {
           </div>
         `);
   
-        // Display subclass
         const subclass = actor.items.find(i => i.type === "subclass" && i.system.classIdentifier === "psionicist");
         if (subclass) {
           html.find(".class .item-name h4").append(` (${subclass.name})`);

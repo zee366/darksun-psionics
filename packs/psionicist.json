@@ -96,7 +96,7 @@
     }
   },
   {
-    "_id": "psychokinSub123",
+    "_id": "psychokinSub1234",
     "name": "Psychokinesis",
     "type": "subclass",
     "system": {
@@ -110,7 +110,7 @@
           "_id": "psychokinFeat01",
           "type": "ItemGrant",
           "configuration": {
-            "items": ["psychokinFeat12"],
+            "items": ["psychokinFeat123"],
             "optional": false
           },
           "value": {},
@@ -121,7 +121,7 @@
     }
   },
   {
-    "_id": "clairsentSub123",
+    "_id": "clairsentSub1234",
     "name": "Clairsentience",
     "type": "subclass",
     "system": {
@@ -135,7 +135,7 @@
           "_id": "clairsentFeat01",
           "type": "ItemGrant",
           "configuration": {
-            "items": ["clairsentFeat12"],
+            "items": ["clairsentFeat123"],
             "optional": false
           },
           "value": {},
@@ -146,7 +146,7 @@
     }
   },
   {
-    "_id": "metapsionSub123",
+    "_id": "metapsionSub1234",
     "name": "Metapsionics",
     "type": "subclass",
     "system": {
@@ -160,7 +160,7 @@
           "_id": "metapsionFeat01",
           "type": "ItemGrant",
           "configuration": {
-            "items": ["metapsionFeat12"],
+            "items": ["metapsionFeat123"],
             "optional": false
           },
           "value": {},
@@ -181,7 +181,7 @@
     }
   },
   {
-    "_id": "psychokinFeat12",
+    "_id": "psychokinFeat123",
     "name": "Kinetic Push",
     "type": "feat",
     "system": {
@@ -191,7 +191,7 @@
     }
   },
   {
-    "_id": "clairsentFeat12",
+    "_id": "clairsentFeat123",
     "name": "Precognition",
     "type": "feat",
     "system": {
@@ -201,7 +201,7 @@
     }
   },
   {
-    "_id": "metapsionFeat12",
+    "_id": "metapsionFeat123",
     "name": "Psionic Amplification",
     "type": "feat",
     "system": {

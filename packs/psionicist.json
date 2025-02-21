@@ -76,7 +76,7 @@
     "type": "subclass",
     "system": {
       "description": {
-        "value": "<p>You specialize in mental communication and influence.</p>"
+        "value": "<p>You specialize in mental communication and influence, weaving thoughts between minds and bending wills to your own.</p>"
       },
       "identifier": "telepathy",
       "classIdentifier": "psionicist",
@@ -91,81 +91,61 @@
           "value": {},
           "level": 1,
           "title": "Mind Link"
-        }
-      ]
-    }
-  },
-  {
-    "_id": "psychokinSub1234",
-    "name": "Psychokinesis",
-    "type": "subclass",
-    "system": {
-      "description": {
-        "value": "<p>You manipulate the physical world with your mind.</p>"
-      },
-      "identifier": "psychokinesis",
-      "classIdentifier": "psionicist",
-      "advancement": [
+        },
         {
-          "_id": "psychokinFeat012",
+          "_id": "telepathyFeat003",
           "type": "ItemGrant",
           "configuration": {
-            "items": ["psychokinFeat123"],
+            "items": ["telepathMind456"],
             "optional": false
           },
           "value": {},
-          "level": 1,
-          "title": "Kinetic Push"
-        }
-      ]
-    }
-  },
-  {
-    "_id": "clairsentSub1234",
-    "name": "Clairsentience",
-    "type": "subclass",
-    "system": {
-      "description": {
-        "value": "<p>You perceive beyond the physical senses.</p>"
-      },
-      "identifier": "clairsentience",
-      "classIdentifier": "psionicist",
-      "advancement": [
+          "level": 3,
+          "title": "Mind Probe"
+        },
         {
-          "_id": "clairsentFeat012",
+          "_id": "telepathyFeat006",
           "type": "ItemGrant",
           "configuration": {
-            "items": ["clairsentFeat123"],
+            "items": ["telepathArea789"],
             "optional": false
           },
           "value": {},
-          "level": 1,
-          "title": "Precognition"
-        }
-      ]
-    }
-  },
-  {
-    "_id": "metapsionSub1234",
-    "name": "Metapsionics",
-    "type": "subclass",
-    "system": {
-      "description": {
-        "value": "<p>You enhance and manipulate psionic energy itself.</p>"
-      },
-      "identifier": "metapsionics",
-      "classIdentifier": "psionicist",
-      "advancement": [
+          "level": 6,
+          "title": "Area Whisper"
+        },
         {
-          "_id": "metapsionFeat012",
+          "_id": "telepathyFeat010",
           "type": "ItemGrant",
           "configuration": {
-            "items": ["metapsionFeat123"],
+            "items": ["telepathDom1011"],
             "optional": false
           },
           "value": {},
-          "level": 1,
-          "title": "Psionic Amplification"
+          "level": 10,
+          "title": "Dominate Mind"
+        },
+        {
+          "_id": "telepathyFeat014",
+          "type": "ItemGrant",
+          "configuration": {
+            "items": ["telepathLink121"],
+            "optional": false
+          },
+          "value": {},
+          "level": 14,
+          "title": "Telepathic Network"
+        },
+        {
+          "_id": "telepathyFeat018",
+          "type": "ItemGrant",
+          "configuration": {
+            "items": ["telepathMass131"],
+            "optional": false
+          },
+          "value": {},
+          "level": 18,
+          "title": "Mass Domination"
         }
       ]
     }
@@ -176,37 +156,137 @@
     "type": "feat",
     "system": {
       "description": {
-        "value": "<p>You can establish a telepathic link with one willing creature within 30 feet, communicating silently for 1 minute. Costs 1 Power Point.</p>"
+        "value": "<p>You can establish a telepathic link with one willing creature within 30 feet, allowing silent communication for 1 minute. Costs 1 Power Point.</p>"
+      },
+      "activation": {
+        "type": "action",
+        "cost": 1,
+        "condition": "Target must be willing"
       }
     }
   },
   {
-    "_id": "psychokinFeat123",
-    "name": "Kinetic Push",
+    "_id": "telepathMind456",
+    "name": "Mind Probe",
     "type": "feat",
     "system": {
       "description": {
-        "value": "<p>You push a Medium or smaller object or creature up to 10 feet away. Costs 1 Power Point.</p>"
+        "value": "<p>You probe a creature’s mind within 30 feet, forcing it to make a DC 13 Wisdom saving throw (DC = 8 + your Intelligence modifier + proficiency bonus). On a failure, you learn one surface thought or memory. Costs 3 Power Points.</p>"
+      },
+      "activation": {
+        "type": "action",
+        "cost": 3
+      },
+      "target": {
+        "type": "creature",
+        "value": 1,
+        "range": 30
+      },
+      "save": {
+        "ability": "wis",
+        "dc": 13
       }
     }
   },
   {
-    "_id": "clairsentFeat123",
-    "name": "Precognition",
+    "_id": "telepathArea789",
+    "name": "Area Whisper",
     "type": "feat",
     "system": {
       "description": {
-        "value": "<p>You gain advantage on one attack roll, saving throw, or ability check within the next minute. Costs 1 Power Point.</p>"
+        "value": "<p>You send a telepathic message to up to 5 willing creatures within 60 feet, lasting 10 minutes. Costs 6 Power Points.</p>"
+      },
+      "activation": {
+        "type": "action",
+        "cost": 6,
+        "condition": "Targets must be willing"
+      },
+      "target": {
+        "type": "creature",
+        "value": 5,
+        "range": 60
+      },
+      "duration": {
+        "value": 10,
+        "units": "minute"
       }
     }
   },
   {
-    "_id": "metapsionFeat123",
-    "name": "Psionic Amplification",
+    "_id": "telepathDom1011",
+    "name": "Dominate Mind",
     "type": "feat",
     "system": {
       "description": {
-        "value": "<p>You can spend 1 extra Power Point when using a psionic ability to increase its effect (e.g., range or damage) by 50%.</p>"
+        "value": "<p>You attempt to control one creature within 60 feet. It must succeed on a DC 15 Wisdom saving throw (DC = 8 + your Intelligence modifier + proficiency bonus) or be charmed and obey your mental commands for 1 hour. Costs 10 Power Points.</p>"
+      },
+      "activation": {
+        "type": "action",
+        "cost": 10
+      },
+      "target": {
+        "type": "creature",
+        "value": 1,
+        "range": 60
+      },
+      "duration": {
+        "value": 1,
+        "units": "hour"
+      },
+      "save": {
+        "ability": "wis",
+        "dc": 15
+      }
+    }
+  },
+  {
+    "_id": "telepathLink121",
+    "name": "Telepathic Network",
+    "type": "feat",
+    "system": {
+      "description": {
+        "value": "<p>You link up to 10 willing creatures within 120 feet into a telepathic network, allowing all to communicate silently for 8 hours. Costs 14 Power Points.</p>"
+      },
+      "activation": {
+        "type": "action",
+        "cost": 14,
+        "condition": "Targets must be willing"
+      },
+      "target": {
+        "type": "creature",
+        "value": 10,
+        "range": 120
+      },
+      "duration": {
+        "value": 8,
+        "units": "hour"
+      }
+    }
+  },
+  {
+    "_id": "telepathMass131",
+    "name": "Mass Domination",
+    "type": "feat",
+    "system": {
+      "description": {
+        "value": "<p>You dominate up to 5 creatures within 120 feet. Each must succeed on a DC 17 Wisdom saving throw (DC = 8 + your Intelligence modifier + proficiency bonus) or be charmed and obey you for 1 hour. Costs 18 Power Points.</p>"
+      },
+      "activation": {
+        "type": "action",
+        "cost": 18
+      },
+      "target": {
+        "type": "creature",
+        "value": 5,
+        "range": 120
+      },
+      "duration": {
+        "value": 1,
+        "units": "hour"
+      },
+      "save": {
+        "ability": "wis",
+        "dc": 17
       }
     }
   }

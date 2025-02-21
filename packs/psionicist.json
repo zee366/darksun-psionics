@@ -96,7 +96,7 @@
           "_id": "telepathyFeat003",
           "type": "ItemGrant",
           "configuration": {
-            "items": ["telepathMind456"],
+            "items": ["telepathMind0001"],
             "optional": false
           },
           "value": {},
@@ -107,7 +107,7 @@
           "_id": "telepathyFeat006",
           "type": "ItemGrant",
           "configuration": {
-            "items": ["telepathArea789"],
+            "items": ["telepathArea0001"],
             "optional": false
           },
           "value": {},
@@ -118,7 +118,7 @@
           "_id": "telepathyFeat010",
           "type": "ItemGrant",
           "configuration": {
-            "items": ["telepathDom1011"],
+            "items": ["telepathDom00001"],
             "optional": false
           },
           "value": {},
@@ -129,7 +129,7 @@
           "_id": "telepathyFeat014",
           "type": "ItemGrant",
           "configuration": {
-            "items": ["telepathLink121"],
+            "items": ["telepathLink0001"],
             "optional": false
           },
           "value": {},
@@ -140,7 +140,7 @@
           "_id": "telepathyFeat018",
           "type": "ItemGrant",
           "configuration": {
-            "items": ["telepathMass131"],
+            "items": ["telepathMass0001"],
             "optional": false
           },
           "value": {},
@@ -166,7 +166,7 @@
     }
   },
   {
-    "_id": "telepathMind456",
+    "_id": "telepathMind0001",
     "name": "Mind Probe",
     "type": "feat",
     "system": {
@@ -189,7 +189,7 @@
     }
   },
   {
-    "_id": "telepathArea789",
+    "_id": "telepathArea0001",
     "name": "Area Whisper",
     "type": "feat",
     "system": {
@@ -213,7 +213,7 @@
     }
   },
   {
-    "_id": "telepathDom1011",
+    "_id": "telepathDom00001",
     "name": "Dominate Mind",
     "type": "feat",
     "system": {
@@ -240,7 +240,7 @@
     }
   },
   {
-    "_id": "telepathLink121",
+    "_id": "telepathLink0001",
     "name": "Telepathic Network",
     "type": "feat",
     "system": {
@@ -264,7 +264,7 @@
     }
   },
   {
-    "_id": "telepathMass131",
+    "_id": "telepathMass0001",
     "name": "Mass Domination",
     "type": "feat",
     "system": {

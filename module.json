@@ -27,17 +27,14 @@
     ]
   },
   "esmodules": [
-    "scripts/setup.js",
-    "scripts/psionicist.js",
-    "scripts/powers.js",
-    "scripts/wildtalents.js"
+    "scripts/setup.js"
   ],
   "styles": [],
   "packs": [
     {
       "name": "psionicist",
       "label": "Psionicist Class",
-      "path": "./packs/psionicist",
+      "path": "./packs/psionicist.json",
       "type": "Item",
       "system": "dnd5e",
       "ownership": {
@@ -46,9 +43,20 @@
       }
     },
     {
-      "name": "powers",
-      "label": "Psionic Powers",
-      "path": "./packs/powers",
+      "name": "subclasses",
+      "label": "Psionic Disciplines",
+      "path": "./packs/psionicistsubclasses.json",
+      "type": "Item",
+      "system": "dnd5e",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "features",
+      "label": "Psionic Features",
+      "path": "./packs/psionicistfeatures.json",
       "type": "Item",
       "system": "dnd5e",
       "ownership": {
@@ -59,7 +67,7 @@
     {
       "name": "wildtalents",
       "label": "Wild Talents",
-      "path": "./packs/wildtalents",
+      "path": "./packs/wildtalents.json",
       "type": "Item",
       "system": "dnd5e",
       "ownership": {
@@ -77,7 +85,7 @@
   ],
   "url": "https://github.com/zee366/darksun-psionics",
   "manifest": "https://raw.githubusercontent.com/zee366/darksun-psionics/dev/module.json",
-  "download": "https://github.com/zee366/darksun-psionics/archive/refs/heads/dev.zip",
+  "download": "https://github.com/zee366/darksun-psionics/archive/refs/heads/main.zip",
   "license": "GPL",
   "readme": "README.md"
 }

@@ -1,30 +1,30 @@
 Hooks.once("ready", async () => {
-    const packKey = "darksun-psionics.psionicist";
-    let pack = game.packs.get(packKey);
-    if (!pack) {
-      pack = await CompendiumCollection.createCompendium({
-        metadata: {
-          id: packKey,
-          label: "Psionicist Class",
-          type: "Item",
-          system: "dnd5e",
-          module: "darksun-psionics"
-        },
-        path: "packs/psionicist"
-      });
-      console.log("Created compendium pack: darksun-psionics.psionicist");
-    }
-    if (pack && pack.index.size === 0) {
-      const response = await fetch("./modules/darksun-psionics/packs/psionicist.json");
-      if (!response.ok) {
-        console.error("Failed to fetch psionicist.json:", response.statusText);
-        return;
+    const packs = [
+      { key: "darksun-psionics.psionicist", path: "./packs/psionicist.json" },
+      { key: "darksun-psionics.psionicistsubclasses", path: "./packs/psionicistsubclasses.json" },
+      { key: "darksun-psionics.psionicistfeatures", path: "./packs/psionicistfeatures.json" }
+    ];
+    for (const { key, path } of packs) {
+      let pack = game.packs.get(key);
+      if (!pack) {
+        pack = await CompendiumCollection.createCompendium({
+          metadata: { id: key, label: key.split(".").pop(), type: "Item", system: "dnd5e", module: "darksun-psionics" },
+          path: `packs/${key.split(".").pop()}`
+        });
+        console.log(`Created compendium pack: ${key}`);
       }
-      const data = await response.json();
-      console.log("JSON data to import:", data.map(d => ({ _id: d._id, name: d.name })));
-      await Item.createDocuments(data, { pack: packKey, keepId: true });
-      await pack.getIndex({ force: true });
-      console.log("Psionicist pack populated with data! Index size:", pack.index.size);
+      if (pack && pack.index.size === 0) {
+        const response = await fetch(path);
+        if (!response.ok) {
+          console.error(`Failed to fetch ${path}:`, response.statusText);
+          continue;
+        }
+        const data = await response.json();
+        console.log(`JSON data to import for ${key}:`, data.map(d => ({ _id: d._id, name: d.name })));
+        await Item.createDocuments(data, { pack: key, keepId: true });
+        await pack.getIndex({ force: true });
+        console.log(`${key} populated with data! Index size:`, pack.index.size);
+      }
     }
   });
   
@@ -44,9 +44,10 @@ Hooks.once("ready", async () => {
       });
       console.log(`Set Power Points to ${powerPoints} for ${actor.name}`);
   
-      const pack = game.packs.get("darksun-psionics.psionicist");
-      await pack.getIndex({ force: true });
-      const subclasses = await pack.getDocuments();
+      const subclassPack = game.packs.get("darksun-psionics.psionicistsubclasses");
+      const featurePack = game.packs.get("darksun-psionics.psionicistfeatures");
+      await subclassPack.getIndex({ force: true });
+      const subclasses = await subclassPack.getDocuments();
       const subclassOptions = subclasses.filter(s => s.type === "subclass" && s.system.classIdentifier === "psionicist");
       if (!actor.items.find(i => i.type === "subclass" && i.system.classIdentifier === "psionicist")) {
         const choice = await new Promise(resolve => {
@@ -76,14 +77,15 @@ Hooks.once("ready", async () => {
           const itemsToGrant = advancements.flatMap(a => a.configuration.items.map(item => item.uuid));
           console.log("Items to grant (UUIDs):", itemsToGrant);
           if (itemsToGrant.length > 0) {
+            await featurePack.getIndex({ force: true });
             const items = [];
             for (const id of itemsToGrant) {
-              const item = await pack.getDocument(id);
+              const item = await featurePack.getDocument(id);
               if (item) {
                 const itemData = item.toObject();
                 itemData.flags = itemData.flags || {};
                 itemData.flags.core = itemData.flags.core || {};
-                itemData.flags.core.sourceId = `Compendium.darksun-psionics.psionicist.${id}`;
+                itemData.flags.core.sourceId = `Compendium.darksun-psionics.psionicistfeatures.${id}`;
                 items.push(itemData);
               }
             }
@@ -113,6 +115,7 @@ Hooks.once("ready", async () => {
       });
       console.log(`Updated Power Points max to ${powerPoints} for ${actor.name} at level ${newLevel}`);
   
+      const featurePack = game.packs.get("darksun-psionics.psionicistfeatures");
       const subclass = actor.items.find(i => i.type === "subclass" && i.system.classIdentifier === "psionicist");
       if (subclass) {
         const advancements = subclass.system.advancement.filter(a => a.type === "ItemGrant" && a.level <= newLevel);
@@ -121,21 +124,20 @@ Hooks.once("ready", async () => {
         console.log("Items to grant (UUIDs):", itemsToGrant);
         const existingItems = actor.items
           .filter(i => i.type === "feat")
-          .map(i => i.flags.core?.sourceId?.split(".").pop()); // Only use sourceId, no fallback
+          .map(i => i.flags.core?.sourceId?.split(".").pop());
         console.log("Existing item IDs (sourceId):", existingItems);
         const itemsToAdd = itemsToGrant.filter(id => !existingItems.includes(id));
         console.log("Items to add (filtered):", itemsToAdd);
         if (itemsToAdd.length > 0) {
-          const pack = game.packs.get("darksun-psionics.psionicist");
-          await pack.getIndex({ force: true });
+          await featurePack.getIndex({ force: true });
           const items = [];
           for (const id of itemsToAdd) {
-            const item = await pack.getDocument(id);
+            const item = await featurePack.getDocument(id);
             if (item) {
               const itemData = item.toObject();
               itemData.flags = itemData.flags || {};
               itemData.flags.core = itemData.flags.core || {};
-              itemData.flags.core.sourceId = `Compendium.darksun-psionics.psionicist.${id}`;
+              itemData.flags.core.sourceId = `Compendium.darksun-psionics.psionicistfeatures.${id}`;
               items.push(itemData);
             }
           }

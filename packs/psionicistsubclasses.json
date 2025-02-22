@@ -1,0 +1,162 @@
+[
+    {
+      "_id": "telepathySub1234",
+      "name": "Telepathy",
+      "type": "subclass",
+      "system": {
+        "description": {
+          "value": "<p>You specialize in mental communication and influence, weaving thoughts between minds and bending wills to your own.</p>"
+        },
+        "identifier": "telepathy",
+        "classIdentifier": "psionicist",
+        "advancement": [
+          {
+            "_id": "telepathyFeat001",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": ["telepathyFeat123"],
+              "optional": false
+            },
+            "value": {},
+            "level": 1,
+            "title": "Mind Link"
+          },
+          {
+            "_id": "telepathyFeat003",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": ["telepathMind456"],
+              "optional": false
+            },
+            "value": {},
+            "level": 3,
+            "title": "Mind Probe"
+          },
+          {
+            "_id": "telepathyFeat006",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": ["telepathArea789"],
+              "optional": false
+            },
+            "value": {},
+            "level": 6,
+            "title": "Area Whisper"
+          },
+          {
+            "_id": "telepathyFeat010",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": ["telepathDom1011"],
+              "optional": false
+            },
+            "value": {},
+            "level": 10,
+            "title": "Dominate Mind"
+          },
+          {
+            "_id": "telepathyFeat014",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": ["telepathLink121"],
+              "optional": false
+            },
+            "value": {},
+            "level": 14,
+            "title": "Telepathic Network"
+          },
+          {
+            "_id": "telepathyFeat018",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": ["telepathMass131"],
+              "optional": false
+            },
+            "value": {},
+            "level": 18,
+            "title": "Mass Domination"
+          }
+        ]
+      }
+    },
+    {
+      "_id": "psychokinSub1234",
+      "name": "Psychokinesis",
+      "type": "subclass",
+      "system": {
+        "description": {
+          "value": "<p>You manipulate the physical world with your mind, bending matter and force to your will.</p>"
+        },
+        "identifier": "psychokinesis",
+        "classIdentifier": "psionicist",
+        "advancement": [
+          {
+            "_id": "psychokinFeat001",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": ["psychokinFeat123"],
+              "optional": false
+            },
+            "value": {},
+            "level": 1,
+            "title": "Kinetic Push"
+          },
+          {
+            "_id": "psychokinFeat003",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": ["psychokinLift456"],
+              "optional": false
+            },
+            "value": {},
+            "level": 3,
+            "title": "Telekinetic Lift"
+          },
+          {
+            "_id": "psychokinFeat006",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": ["psychokinBarr789"],
+              "optional": false
+            },
+            "value": {},
+            "level": 6,
+            "title": "Force Barrier"
+          },
+          {
+            "_id": "psychokinFeat010",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": ["psychokinCr1011"],
+              "optional": false
+            },
+            "value": {},
+            "level": 10,
+            "title": "Crushing Grip"
+          },
+          {
+            "_id": "psychokinFeat014",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": ["psychokinFli121"],
+              "optional": false
+            },
+            "value": {},
+            "level": 14,
+            "title": "Flight"
+          },
+          {
+            "_id": "psychokinFeat018",
+            "type": "ItemGrant",
+            "configuration": {
+              "items": ["psychokinSto131"],
+              "optional": false
+            },
+            "value": {},
+            "level": 18,
+            "title": "Kinetic Storm"
+          }
+        ]
+      }
+    }
+  ]

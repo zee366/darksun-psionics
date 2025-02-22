@@ -1,0 +1,155 @@
+[
+    {
+      "_id": "telepathyFeat123",
+      "name": "Mind Link",
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>You can establish a telepathic link with one willing creature within 30 feet, allowing silent communication for 1 minute. Costs 1 Power Point.</p>"
+        },
+        "activation": { "type": "action", "cost": 1, "condition": "Target must be willing" }
+      }
+    },
+    {
+      "_id": "telepathMind456",
+      "name": "Mind Probe",
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>You probe a creature’s mind within 30 feet, forcing it to make a DC 13 Wisdom saving throw (DC = 8 + your Intelligence modifier + proficiency bonus). On a failure, you learn one surface thought or memory. Costs 3 Power Points.</p>"
+        },
+        "activation": { "type": "action", "cost": 3 },
+        "target": { "type": "creature", "value": 1, "range": 30 },
+        "save": { "ability": "wis", "dc": 13 }
+      }
+    },
+    {
+      "_id": "telepathArea789",
+      "name": "Area Whisper",
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>You send a telepathic message to up to 5 willing creatures within 60 feet, lasting 10 minutes. Costs 6 Power Points.</p>"
+        },
+        "activation": { "type": "action", "cost": 6, "condition": "Targets must be willing" },
+        "target": { "type": "creature", "value": 5, "range": 60 },
+        "duration": { "value": 10, "units": "minute" }
+      }
+    },
+    {
+      "_id": "telepathDom1011",
+      "name": "Dominate Mind",
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>You attempt to control one creature within 60 feet. It must succeed on a DC 15 Wisdom saving throw (DC = 8 + your Intelligence modifier + proficiency bonus) or be charmed and obey your mental commands for 1 hour. Costs 10 Power Points.</p>"
+        },
+        "activation": { "type": "action", "cost": 10 },
+        "target": { "type": "creature", "value": 1, "range": 60 },
+        "duration": { "value": 1, "units": "hour" },
+        "save": { "ability": "wis", "dc": 15 }
+      }
+    },
+    {
+      "_id": "telepathLink121",
+      "name": "Telepathic Network",
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>You link up to 10 willing creatures within 120 feet into a telepathic network, allowing all to communicate silently for 8 hours. Costs 14 Power Points.</p>"
+        },
+        "activation": { "type": "action", "cost": 14, "condition": "Targets must be willing" },
+        "target": { "type": "creature", "value": 10, "range": 120 },
+        "duration": { "value": 8, "units": "hour" }
+      }
+    },
+    {
+      "_id": "telepathMass131",
+      "name": "Mass Domination",
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>You dominate up to 5 creatures within 120 feet. Each must succeed on a DC 17 Wisdom saving throw (DC = 8 + your Intelligence modifier + proficiency bonus) or be charmed and obey you for 1 hour. Costs 18 Power Points.</p>"
+        },
+        "activation": { "type": "action", "cost": 18 },
+        "target": { "type": "creature", "value": 5, "range": 120 },
+        "duration": { "value": 1, "units": "hour" },
+        "save": { "ability": "wis", "dc": 17 }
+      }
+    },
+    {
+      "_id": "psychokinFeat123",
+      "name": "Kinetic Push",
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>You push a Medium or smaller object or creature up to 10 feet away. Costs 1 Power Point.</p>"
+        },
+        "activation": { "type": "action", "cost": 1 },
+        "target": { "type": "creature", "value": 1, "range": 10 }
+      }
+    },
+    {
+      "_id": "psychokinLift456",
+      "name": "Telekinetic Lift",
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>You lift an object up to 50 lbs within 30 feet and move it up to 15 feet. Costs 3 Power Points.</p>"
+        },
+        "activation": { "type": "action", "cost": 3 },
+        "target": { "type": "object", "value": 1, "range": 30 }
+      }
+    },
+    {
+      "_id": "psychokinBarr789",
+      "name": "Force Barrier",
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>You create a 10-foot-square wall of force within 60 feet, lasting 1 minute. Costs 6 Power Points.</p>"
+        },
+        "activation": { "type": "action", "cost": 6 },
+        "duration": { "value": 1, "units": "minute" },
+        "range": { "value": 60, "units": "feet" }
+      }
+    },
+    {
+      "_id": "psychokinCr1011",
+      "name": "Crushing Grip",
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>You crush a creature within 60 feet, dealing 4d6 bludgeoning damage (DC 15 Str save half, DC = 8 + Int + prof). Costs 10 Power Points.</p>"
+        },
+        "activation": { "type": "action", "cost": 10 },
+        "target": { "type": "creature", "value": 1, "range": 60 },
+        "save": { "ability": "str", "dc": 15 }
+      }
+    },
+    {
+      "_id": "psychokinFli121",
+      "name": "Flight",
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>You gain a flying speed of 60 feet for 10 minutes. Costs 14 Power Points.</p>"
+        },
+        "activation": { "type": "action", "cost": 14 },
+        "duration": { "value": 10, "units": "minute" }
+      }
+    },
+    {
+      "_id": "psychokinSto131",
+      "name": "Kinetic Storm",
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>You unleash a 20-foot-radius storm of force within 120 feet, dealing 10d6 bludgeoning damage to all creatures (DC 17 Dex save half, DC = 8 + Int + prof). Costs 18 Power Points.</p>"
+        },
+        "activation": { "type": "action", "cost": 18 },
+        "target": { "type": "sphere", "value": 20, "range": 120 },
+        "save": { "ability": "dex", "dc": 17 }
+      }
+    }
+  ]

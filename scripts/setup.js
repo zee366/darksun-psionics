@@ -79,11 +79,17 @@ Hooks.once("ready", async () => {
             const items = [];
             for (const id of itemsToGrant) {
               const item = await pack.getDocument(id);
-              if (item) items.push(item);
+              if (item) {
+                const itemData = item.toObject();
+                itemData.flags = itemData.flags || {};
+                itemData.flags.core = itemData.flags.core || {};
+                itemData.flags.core.sourceId = `Compendium.darksun-psionics.psionicist.${id}`;
+                items.push(itemData);
+              }
             }
             console.log("Fetched items:", items.map(i => i.name));
             if (items.length > 0) {
-              await actor.createEmbeddedDocuments("Item", items.map(i => i.toObject()));
+              await actor.createEmbeddedDocuments("Item", items);
               console.log(`Granted ${items.length} initial items for ${subclass.name}`);
             } else {
               console.log("No items fetched for granted UUIDs:", itemsToGrant);
@@ -115,8 +121,8 @@ Hooks.once("ready", async () => {
         console.log("Items to grant (UUIDs):", itemsToGrant);
         const existingItems = actor.items
           .filter(i => i.type === "feat")
-          .map(i => i.flags.core?.sourceId?.split(".").pop() || i._id); // Extract original _id from sourceId
-        console.log("Existing item IDs:", existingItems);
+          .map(i => i.flags.core?.sourceId?.split(".").pop()); // Only use sourceId, no fallback
+        console.log("Existing item IDs (sourceId):", existingItems);
         const itemsToAdd = itemsToGrant.filter(id => !existingItems.includes(id));
         console.log("Items to add (filtered):", itemsToAdd);
         if (itemsToAdd.length > 0) {
@@ -125,11 +131,17 @@ Hooks.once("ready", async () => {
           const items = [];
           for (const id of itemsToAdd) {
             const item = await pack.getDocument(id);
-            if (item) items.push(item);
+            if (item) {
+              const itemData = item.toObject();
+              itemData.flags = itemData.flags || {};
+              itemData.flags.core = itemData.flags.core || {};
+              itemData.flags.core.sourceId = `Compendium.darksun-psionics.psionicist.${id}`;
+              items.push(itemData);
+            }
           }
           console.log("Fetched items:", items.map(i => i.name));
           if (items.length > 0) {
-            await actor.createEmbeddedDocuments("Item", items.map(i => i.toObject()));
+            await actor.createEmbeddedDocuments("Item", items);
             console.log(`Granted ${items.length} new items for ${subclass.name} up to level ${newLevel}`);
           } else {
             console.log("No items fetched for granted UUIDs:", itemsToAdd);

@@ -1,8 +1,8 @@
 Hooks.once("ready", async () => {
     const packs = [
-      { key: "darksun-psionics.psionicist", path: "./packs/psionicist.json" },
-      { key: "darksun-psionics.psionicistsubclasses", path: "./packs/psionicistsubclasses.json" },
-      { key: "darksun-psionics.psionicistfeatures", path: "./packs/psionicistfeatures.json" }
+      { key: "darksun-psionics.psionicist", path: "./packs/psionicist" },
+      { key: "darksun-psionics.psionicistsubclasses", path: "./packs/psionicistsubclasses" },
+      { key: "darksun-psionics.psionicistfeatures", path: "./packs/psionicistfeatures" }
     ];
     for (const { key, path } of packs) {
       let pack = game.packs.get(key);

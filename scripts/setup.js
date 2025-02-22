@@ -1,33 +1,17 @@
 Hooks.once("ready", async () => {
     const packs = [
-      { key: "darksun-psionics.psionicist", path: "packs/psionicist.json", name: "psionicist", label: "Psionicist Class" },
-      { key: "darksun-psionics.subclasses", path: "packs/psionicistsubclasses.json", name: "subclasses", label: "Psionic Disciplines" },
-      { key: "darksun-psionics.features", path: "packs/psionicistfeatures.json", name: "features", label: "Psionic Features" }
+      { key: "darksun-psionics.psionicist", path: "packs/psionicist.json" },
+      { key: "darksun-psionics.subclasses", path: "packs/psionicistsubclasses.json" },
+      { key: "darksun-psionics.features", path: "packs/psionicistfeatures.json" }
     ];
   
-    for (const { key, path, name, label } of packs) {
-      let pack = game.packs.get(key);
+    for (const { key, path } of packs) {
+      const pack = game.packs.get(key);
       if (!pack) {
-        try {
-          await CompendiumCollection.createCompendium({
-            type: "Item",
-            name: name,
-            label: label
-          });
-          console.log(`Created compendium pack: ${key}`);
-          // Small delay to ensure pack is registered
-          await new Promise(resolve => setTimeout(resolve, 100));
-          pack = game.packs.get(key);
-          if (!pack) {
-            console.error(`Pack ${key} still not found after creation!`);
-            continue;
-          }
-        } catch (error) {
-          console.error(`Failed to create compendium ${key}:`, error);
-          continue;
-        }
+        console.error(`Pack ${key} not found in game.packs! Check module.json or file placement.`);
+        continue;
       }
-      if (pack && pack.index.size === 0) {
+      if (pack.index.size === 0) {
         const response = await fetch(`./modules/darksun-psionics/${path}`);
         if (!response.ok) {
           console.error(`Failed to fetch ${path}:`, response.statusText);
@@ -38,6 +22,8 @@ Hooks.once("ready", async () => {
         await Item.createDocuments(data, { pack: key, keepId: true });
         await pack.getIndex({ force: true });
         console.log(`${key} populated with data! Index size:`, pack.index.size);
+      } else {
+        console.log(`${key} already populated. Index size:`, pack.index.size);
       }
     }
   });

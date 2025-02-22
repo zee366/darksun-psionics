@@ -45,7 +45,7 @@
     {
       "name": "subclasses",
       "label": "Psionic Disciplines",
-      "path": "./packs/psionicistsubclasses.json",
+      "path": "./packs/psionicistsubclasses",
       "type": "Item",
       "system": "dnd5e",
       "ownership": {
@@ -56,7 +56,7 @@
     {
       "name": "features",
       "label": "Psionic Features",
-      "path": "./packs/psionicistfeatures.json",
+      "path": "./packs/psionicistfeatures",
       "type": "Item",
       "system": "dnd5e",
       "ownership": {
@@ -67,7 +67,7 @@
     {
       "name": "wildtalents",
       "label": "Wild Talents",
-      "path": "./packs/wildtalents.json",
+      "path": "./packs/wildtalents",
       "type": "Item",
       "system": "dnd5e",
       "ownership": {

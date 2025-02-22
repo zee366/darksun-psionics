@@ -64,6 +64,14 @@
           "title": "Psionic Focus"
         },
         {
+          "_id": "psionicistPowers1",
+          "type": "ItemGrant",
+          "configuration": { "items": ["psionicPower0001", "psionicPower0002"], "optional": true },
+          "value": {},
+          "level": 1,
+          "title": "Psionic Powers"
+        },
+        {
           "_id": "psionicistAdvc02",
           "type": "ItemGrant",
           "configuration": { "items": ["psionicistFeat02"], "optional": false },

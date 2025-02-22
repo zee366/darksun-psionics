@@ -8,7 +8,7 @@ Hooks.once("ready", async () => {
       { key: "darksun-psionics.psionicist", path: "packs/psionicist.json" },
       { key: "darksun-psionics.subclasses", path: "packs/psionicistsubclasses.json" },
       { key: "darksun-psionics.features", path: "packs/psionicistfeatures.json" },
-      { key: "darksun-psionics.powers", path: "packs/powers.json" } // New powers compendium
+      { key: "darksun-psionics.powers", path: "packs/powers.json" }
     ];
   
     for (const { key, path } of packs) {
@@ -40,7 +40,6 @@ Hooks.once("ready", async () => {
     }
   });
   
-  // Rest of your setup.js (createItem, updateItem, renderActorSheet hooks unchanged)
   Hooks.on("createItem", async (item, options, userId) => {
     if (item.type === "class" && item.name === "Psionicist" && item.parent) {
       const actor = item.parent;
@@ -57,6 +56,7 @@ Hooks.once("ready", async () => {
       });
       console.log(`Set Power Points to ${powerPoints} for ${actor.name}`);
   
+      // Skill Selection Prompt
       const skillChoices = ["arcana", "history", "insight", "investigation", "perception", "persuasion"];
       const currentSkills = actor.system.skills.value || [];
       if (currentSkills.length < 2 && !options.skipSkillPrompt) {
@@ -150,6 +150,62 @@ Hooks.once("ready", async () => {
             }
           } else {
             console.log("No initial items found to grant.");
+          }
+        }
+      }
+
+      // Power Selection Prompt
+      const powerPack = game.packs.get("darksun-psionics.powers");
+      await powerPack.getIndex({ force: true });
+      const powers = await powerPack.getDocuments();
+      const powerOptions = powers.filter(p => p.system.level === 1);
+      const currentPowers = actor.items.filter(i => i.type === "spell").map(i => i._id);
+      if (currentPowers.length < 2 && !options.skipPowerPrompt) {
+        const selectedPowers = await new Promise(resolve => {
+          new Dialog({
+            title: "Choose Psionic Powers",
+            content: `
+              <p>Select 2 level 1 psionic powers:</p>
+              <select multiple id="powerChoices" size="${powerOptions.length}">
+                ${powerOptions.map(power => `
+                  <option value="${power._id}" ${currentPowers.includes(power._id) ? "selected" : ""}>
+                    ${power.name}
+                  </option>
+                `).join("")}
+              </select>
+            `,
+            buttons: {
+              ok: {
+                label: "Confirm",
+                callback: html => {
+                  const selected = Array.from(html.find("#powerChoices")[0].selectedOptions).map(option => option.value);
+                  if (selected.length !== 2) {
+                    ui.notifications.warn("Please select exactly 2 powers.");
+                    resolve(null);
+                  } else {
+                    resolve(selected);
+                  }
+                }
+              }
+            },
+            default: "ok"
+          }).render(true);
+        });
+        if (selectedPowers) {
+          const items = [];
+          for (const id of selectedPowers) {
+            const power = powerOptions.find(p => p._id === id);
+            if (power) {
+              const powerData = power.toObject();
+              powerData.flags = powerData.flags || {};
+              powerData.flags.core = powerData.flags.core || {};
+              powerData.flags.core.sourceId = `Compendium.darksun-psionics.powers.${id}`;
+              items.push(powerData);
+            }
+          }
+          if (items.length > 0) {
+            await actor.createEmbeddedDocuments("Item", items);
+            console.log(`Granted ${items.length} powers to ${actor.name}:`, items.map(i => i.name));
           }
         }
       }

@@ -1,5 +1,79 @@
 [
     {
+      "_id": "psionicistFeat01",
+      "name": "Psionic Focus",
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>Spend 1 minute meditating to gain Psionic Focus (no PP cost). While focused, add your Intelligence modifier to one ability check or saving throw per turn. Lose focus if knocked unconscious. Regain with a short rest.</p>"
+        }
+      }
+    },
+    {
+      "_id": "psionicistFeat02",
+      "name": "Mental Resistance",
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>You gain resistance to psychic damage and advantage on saving throws against being charmed or frightened.</p>"
+        }
+      }
+    },
+    {
+      "_id": "psionicistFeat03",
+      "name": "Psionic Surge",
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>Once per long rest, as a bonus action, regain Power Points equal to your Intelligence modifier (minimum 1), not exceeding your maximum.</p>"
+        }
+      }
+    },
+    {
+      "_id": "psionicistFeat04",
+      "name": "Mind Over Matter",
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>Spend 5 PP to ignore difficult terrain or gain a 10-foot fly speed until the end of your turn (no concentration).</p>"
+        },
+        "activation": { "type": "bonus", "cost": 5 }
+      }
+    },
+    {
+      "_id": "psionicistFeat05",
+      "name": "Psychic Backlash",
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>When hit by a melee attack, spend 7 PP as a reaction to deal psychic damage equal to your Intelligence modifier + Psionicist level to the attacker (no save).</p>"
+        },
+        "activation": { "type": "reaction", "cost": 7 }
+      }
+    },
+    {
+      "_id": "psionicistFeat06",
+      "name": "Psionic Mastery",
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>Once per short rest, reduce the PP cost of one power by your Intelligence modifier (minimum 1, can’t reduce below 1 PP).</p>"
+        }
+      }
+    },
+    {
+      "_id": "psionicistFeat07",
+      "name": "Unity of Mind",
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>As an action, spend 20 PP to gain immunity to psychic damage, advantage on Intelligence, Wisdom, and Charisma saves, and double Psionic Surge regeneration for 1 minute. Once per long rest.</p>"
+        },
+        "activation": { "type": "action", "cost": 20 },
+        "duration": { "value": 1, "units": "minute" }
+      }
+    },
+    {
       "_id": "telepathyFeat001",
       "name": "Mind Link",
       "type": "feat",

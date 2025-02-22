@@ -54,6 +54,62 @@
           },
           "value": { "level": 1 },
           "title": "Power Points Progression"
+        },
+        {
+          "_id": "psionicistAdvc01",
+          "type": "ItemGrant",
+          "configuration": { "items": ["psionicistFeat01"], "optional": false },
+          "value": {},
+          "level": 1,
+          "title": "Psionic Focus"
+        },
+        {
+          "_id": "psionicistAdvc02",
+          "type": "ItemGrant",
+          "configuration": { "items": ["psionicistFeat02"], "optional": false },
+          "value": {},
+          "level": 2,
+          "title": "Mental Resistance"
+        },
+        {
+          "_id": "psionicistAdvc05",
+          "type": "ItemGrant",
+          "configuration": { "items": ["psionicistFeat03"], "optional": false },
+          "value": {},
+          "level": 5,
+          "title": "Psionic Surge"
+        },
+        {
+          "_id": "psionicistAdvc09",
+          "type": "ItemGrant",
+          "configuration": { "items": ["psionicistFeat04"], "optional": false },
+          "value": {},
+          "level": 9,
+          "title": "Mind Over Matter"
+        },
+        {
+          "_id": "psionicistAdvc13",
+          "type": "ItemGrant",
+          "configuration": { "items": ["psionicistFeat05"], "optional": false },
+          "value": {},
+          "level": 13,
+          "title": "Psychic Backlash"
+        },
+        {
+          "_id": "psionicistAdvc17",
+          "type": "ItemGrant",
+          "configuration": { "items": ["psionicistFeat06"], "optional": false },
+          "value": {},
+          "level": 17,
+          "title": "Psionic Mastery"
+        },
+        {
+          "_id": "psionicistAdvc20",
+          "type": "ItemGrant",
+          "configuration": { "items": ["psionicistFeat07"], "optional": false },
+          "value": {},
+          "level": 20,
+          "title": "Unity of Mind"
         }
       ],
       "proficiencies": {

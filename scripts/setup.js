@@ -4,17 +4,24 @@ Hooks.once("ready", async () => {
       { key: "darksun-psionics.subclasses", path: "packs/psionicistsubclasses.json", name: "subclasses", label: "Psionic Disciplines" },
       { key: "darksun-psionics.features", path: "packs/psionicistfeatures.json", name: "features", label: "Psionic Features" }
     ];
+  
     for (const { key, path, name, label } of packs) {
       let pack = game.packs.get(key);
       if (!pack) {
         try {
-          pack = await CompendiumCollection.createCompendium({
+          await CompendiumCollection.createCompendium({
             type: "Item",
-            name: name, // Required, must be a slug-like string
-            label: label, // Optional display name
-            path: path // Optional, but aligns with JSON file
+            name: name,
+            label: label
           });
           console.log(`Created compendium pack: ${key}`);
+          // Small delay to ensure pack is registered
+          await new Promise(resolve => setTimeout(resolve, 100));
+          pack = game.packs.get(key);
+          if (!pack) {
+            console.error(`Pack ${key} still not found after creation!`);
+            continue;
+          }
         } catch (error) {
           console.error(`Failed to create compendium ${key}:`, error);
           continue;

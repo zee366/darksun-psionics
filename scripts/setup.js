@@ -1,5 +1,4 @@
 Hooks.once("ready", async () => {
-    // Only run for GM to avoid permission issues
     if (!game.user.isGM) {
       console.log("Skipping compendium population - not GM.");
       return;
@@ -8,7 +7,8 @@ Hooks.once("ready", async () => {
     const packs = [
       { key: "darksun-psionics.psionicist", path: "packs/psionicist.json" },
       { key: "darksun-psionics.subclasses", path: "packs/psionicistsubclasses.json" },
-      { key: "darksun-psionics.features", path: "packs/psionicistfeatures.json" }
+      { key: "darksun-psionics.features", path: "packs/psionicistfeatures.json" },
+      { key: "darksun-psionics.powers", path: "packs/powers.json" } // New powers compendium
     ];
   
     for (const { key, path } of packs) {
@@ -18,7 +18,6 @@ Hooks.once("ready", async () => {
         continue;
       }
       if (pack.index.size === 0) {
-        // Unlock the compendium if locked
         if (pack.locked) {
           await pack.configure({ locked: false });
           console.log(`Unlocked compendium ${key} for population.`);
@@ -33,7 +32,6 @@ Hooks.once("ready", async () => {
         await Item.createDocuments(data, { pack: key, keepId: true });
         await pack.getIndex({ force: true });
         console.log(`${key} populated with data! Index size:`, pack.index.size);
-        // Optionally re-lock after population
         await pack.configure({ locked: true });
         console.log(`Re-locked compendium ${key} after population.`);
       } else {
@@ -42,6 +40,7 @@ Hooks.once("ready", async () => {
     }
   });
   
+  // Rest of your setup.js (createItem, updateItem, renderActorSheet hooks unchanged)
   Hooks.on("createItem", async (item, options, userId) => {
     if (item.type === "class" && item.name === "Psionicist" && item.parent) {
       const actor = item.parent;
@@ -57,6 +56,45 @@ Hooks.once("ready", async () => {
         }
       });
       console.log(`Set Power Points to ${powerPoints} for ${actor.name}`);
+  
+      const skillChoices = ["arcana", "history", "insight", "investigation", "perception", "persuasion"];
+      const currentSkills = actor.system.skills.value || [];
+      if (currentSkills.length < 2 && !options.skipSkillPrompt) {
+        const selectedSkills = await new Promise(resolve => {
+          new Dialog({
+            title: "Choose Psionicist Skills",
+            content: `
+              <p>Select 2 skills for your Psionicist:</p>
+              <select multiple id="skillChoices" size="6">
+                ${skillChoices.map(skill => `
+                  <option value="${skill}" ${currentSkills.includes(skill) ? "selected" : ""}>
+                    ${skill.charAt(0).toUpperCase() + skill.slice(1)}
+                  </option>
+                `).join("")}
+              </select>
+            `,
+            buttons: {
+              ok: {
+                label: "Confirm",
+                callback: html => {
+                  const selected = Array.from(html.find("#skillChoices")[0].selectedOptions).map(option => option.value);
+                  if (selected.length !== 2) {
+                    ui.notifications.warn("Please select exactly 2 skills.");
+                    resolve(null);
+                  } else {
+                    resolve(selected);
+                  }
+                }
+              }
+            },
+            default: "ok"
+          }).render(true);
+        });
+        if (selectedSkills) {
+          await actor.update({ "system.skills.value": selectedSkills });
+          console.log(`Set skills for ${actor.name}:`, selectedSkills);
+        }
+      }
   
       const subclassPack = game.packs.get("darksun-psionics.subclasses");
       const featurePack = game.packs.get("darksun-psionics.features");

@@ -1,1 +1,56 @@
-[]
+[
+    {
+      "_id": "psionicPow0001",
+      "name": "Detect Psionics",
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>You sense psionic activity or creatures with psionic abilities within 30 feet for 1 minute. Costs 1 Power Point.</p>"
+        },
+        "activation": { "type": "action", "cost": 1 },
+        "duration": { "value": 1, "units": "minute" },
+        "range": { "value": 30, "units": "feet" },
+        "level": 1
+      }
+    },
+    {
+      "_id": "psionicPow0002",
+      "name": "Energy Pulse",
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>You project a pulse of force at one creature within 30 feet, dealing 1d6 force damage. Costs 1 Power Point.</p>"
+        },
+        "activation": { "type": "action", "cost": 1 },
+        "target": { "type": "creature", "value": 1, "range": 30 },
+        "damage": { "parts": [["1d6", "force"]] },
+        "level": 1
+      }
+    },
+    {
+      "_id": "psionicPow0003",
+      "name": "Mind Whisper",
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>You send a short mental message (up to 10 words) to one creature within 60 feet that can understand you. Costs 1 Power Point.</p>"
+        },
+        "activation": { "type": "action", "cost": 1 },
+        "target": { "type": "creature", "value": 1, "range": 60 },
+        "level": 1
+      }
+    },
+    {
+      "_id": "psionicPow0004",
+      "name": "Mental Shield",
+      "type": "feat",
+      "system": {
+        "description": {
+          "value": "<p>As a reaction when targeted by an attack, gain +2 AC until the start of your next turn. Costs 1 Power Point.</p>"
+        },
+        "activation": { "type": "reaction", "cost": 1 },
+        "duration": { "value": 1, "units": "round" },
+        "level": 1
+      }
+    }
+  ]

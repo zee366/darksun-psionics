@@ -65,6 +65,17 @@
       }
     },
     {
+      "name": "powers",
+      "label": "Psionic Powers",
+      "path": "./packs/powers",
+      "type": "Item",
+      "system": "dnd5e",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
       "name": "wildtalents",
       "label": "Wild Talents",
       "path": "./packs/wildtalents",

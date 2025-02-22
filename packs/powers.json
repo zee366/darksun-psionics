@@ -1,6 +1,6 @@
 [
     {
-      "_id": "psionicPow0001",
+      "_id": "psionicPower0001",
       "name": "Detect Psionics",
       "type": "feat",
       "system": {
@@ -14,7 +14,7 @@
       }
     },
     {
-      "_id": "psionicPow0002",
+      "_id": "psionicPower0002",
       "name": "Energy Pulse",
       "type": "feat",
       "system": {
@@ -28,7 +28,7 @@
       }
     },
     {
-      "_id": "psionicPow0003",
+      "_id": "psionicPower0003",
       "name": "Mind Whisper",
       "type": "feat",
       "system": {
@@ -41,7 +41,7 @@
       }
     },
     {
-      "_id": "psionicPow0004",
+      "_id": "psionicPower0004",
       "name": "Mental Shield",
       "type": "feat",
       "system": {

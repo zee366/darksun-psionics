@@ -114,7 +114,7 @@ Hooks.once("ready", async () => {
         const itemsToGrant = advancements.flatMap(a => a.configuration.items.map(item => item.uuid));
         console.log("Items to grant (UUIDs):", itemsToGrant);
         const existingItems = actor.items.filter(i => i.type === "feat").map(i => i._id);
-        const itemsToAdd = itemsToGrant.filter(id => !existingItems.includes(id));
+        const itemsToAdd = itemsToGrant.filter(id => !existingItems.includes(id.uuid));
         console.log("Items to add (filtered):", itemsToAdd);
         if (itemsToAdd.length > 0) {
           const pack = game.packs.get("darksun-psionics.psionicist");

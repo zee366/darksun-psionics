@@ -11,7 +11,7 @@
         "classIdentifier": "psionicist",
         "advancement": [
           {
-            "_id": "telepathyFeat001",
+            "_id": "telepathyAdvc001",
             "type": "ItemGrant",
             "configuration": {
               "items": ["telepathyFeat001"],
@@ -22,7 +22,7 @@
             "title": "Mind Link"
           },
           {
-            "_id": "telepathyFeat003",
+            "_id": "telepathyAdvc003",
             "type": "ItemGrant",
             "configuration": {
               "items": ["telepathyFeat002"],
@@ -33,7 +33,7 @@
             "title": "Mind Probe"
           },
           {
-            "_id": "telepathyFeat006",
+            "_id": "telepathyAdvc006",
             "type": "ItemGrant",
             "configuration": {
               "items": ["telepathyFeat003"],
@@ -44,7 +44,7 @@
             "title": "Area Whisper"
           },
           {
-            "_id": "telepathyFeat010",
+            "_id": "telepathyAdvc010",
             "type": "ItemGrant",
             "configuration": {
               "items": ["telepathyFeat004"],
@@ -55,7 +55,7 @@
             "title": "Dominate Mind"
           },
           {
-            "_id": "telepathyFeat014",
+            "_id": "telepathyAdvc014",
             "type": "ItemGrant",
             "configuration": {
               "items": ["telepathyFeat005"],
@@ -66,7 +66,7 @@
             "title": "Telepathic Network"
           },
           {
-            "_id": "telepathyFeat018",
+            "_id": "telepathyAdvc018",
             "type": "ItemGrant",
             "configuration": {
               "items": ["telepathyFeat006"],
@@ -91,7 +91,7 @@
         "classIdentifier": "psionicist",
         "advancement": [
           {
-            "_id": "psychokinFeat001",
+            "_id": "psychokinAdvc001",
             "type": "ItemGrant",
             "configuration": {
               "items": ["psychokinFeat001"],
@@ -102,7 +102,7 @@
             "title": "Kinetic Push"
           },
           {
-            "_id": "psychokinFeat003",
+            "_id": "psychokinAdvc003",
             "type": "ItemGrant",
             "configuration": {
               "items": ["psychokinFeat002"],
@@ -113,7 +113,7 @@
             "title": "Telekinetic Lift"
           },
           {
-            "_id": "psychokinFeat006",
+            "_id": "psychokinAdvc006",
             "type": "ItemGrant",
             "configuration": {
               "items": ["psychokinFeat003"],
@@ -124,7 +124,7 @@
             "title": "Force Barrier"
           },
           {
-            "_id": "psychokinFeat010",
+            "_id": "psychokinAdvc010",
             "type": "ItemGrant",
             "configuration": {
               "items": ["psychokinFeat004"],
@@ -135,7 +135,7 @@
             "title": "Crushing Grip"
           },
           {
-            "_id": "psychokinFeat014",
+            "_id": "psychokinAdvc014",
             "type": "ItemGrant",
             "configuration": {
               "items": ["psychokinFeat005"],
@@ -146,7 +146,7 @@
             "title": "Flight"
           },
           {
-            "_id": "psychokinFeat018",
+            "_id": "psychokinAdvc018",
             "type": "ItemGrant",
             "configuration": {
               "items": ["psychokinFeat006"],

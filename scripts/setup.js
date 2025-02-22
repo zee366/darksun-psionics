@@ -1,4 +1,10 @@
 Hooks.once("ready", async () => {
+    // Only run for GM to avoid permission issues
+    if (!game.user.isGM) {
+      console.log("Skipping compendium population - not GM.");
+      return;
+    }
+  
     const packs = [
       { key: "darksun-psionics.psionicist", path: "packs/psionicist.json" },
       { key: "darksun-psionics.subclasses", path: "packs/psionicistsubclasses.json" },
@@ -12,6 +18,11 @@ Hooks.once("ready", async () => {
         continue;
       }
       if (pack.index.size === 0) {
+        // Unlock the compendium if locked
+        if (pack.locked) {
+          await pack.configure({ locked: false });
+          console.log(`Unlocked compendium ${key} for population.`);
+        }
         const response = await fetch(`./modules/darksun-psionics/${path}`);
         if (!response.ok) {
           console.error(`Failed to fetch ${path}:`, response.statusText);
@@ -22,6 +33,9 @@ Hooks.once("ready", async () => {
         await Item.createDocuments(data, { pack: key, keepId: true });
         await pack.getIndex({ force: true });
         console.log(`${key} populated with data! Index size:`, pack.index.size);
+        // Optionally re-lock after population
+        await pack.configure({ locked: true });
+        console.log(`Re-locked compendium ${key} after population.`);
       } else {
         console.log(`${key} already populated. Index size:`, pack.index.size);
       }

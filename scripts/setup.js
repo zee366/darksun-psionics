@@ -1,22 +1,18 @@
 Hooks.once("ready", async () => {
     const packs = [
-      { key: "darksun-psionics.psionicist", path: "./packs/psionicist.json", label: "Psionicist Class" },
-      { key: "darksun-psionics.subclasses", path: "./packs/psionicistsubclasses.json", label: "Psionic Disciplines" },
-      { key: "darksun-psionics.features", path: "./packs/psionicistfeatures.json", label: "Psionic Features" }
+      { key: "darksun-psionics.psionicist", path: "packs/psionicist.json", name: "psionicist", label: "Psionicist Class" },
+      { key: "darksun-psionics.subclasses", path: "packs/psionicistsubclasses.json", name: "subclasses", label: "Psionic Disciplines" },
+      { key: "darksun-psionics.features", path: "packs/psionicistfeatures.json", name: "features", label: "Psionic Features" }
     ];
-    for (const { key, path, label } of packs) {
+    for (const { key, path, name, label } of packs) {
       let pack = game.packs.get(key);
       if (!pack) {
         try {
           pack = await CompendiumCollection.createCompendium({
-            metadata: {
-              id: key,
-              name: key.split(".").pop(), // e.g., "psionicist", "subclasses", "features"
-              label: label,
-              type: "Item",
-              system: "dnd5e",
-              module: "darksun-psionics"
-            }
+            type: "Item",
+            name: name, // Required, must be a slug-like string
+            label: label, // Optional display name
+            path: path // Optional, but aligns with JSON file
           });
           console.log(`Created compendium pack: ${key}`);
         } catch (error) {
@@ -25,7 +21,7 @@ Hooks.once("ready", async () => {
         }
       }
       if (pack && pack.index.size === 0) {
-        const response = await fetch(path);
+        const response = await fetch(`./modules/darksun-psionics/${path}`);
         if (!response.ok) {
           console.error(`Failed to fetch ${path}:`, response.statusText);
           continue;

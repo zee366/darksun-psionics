@@ -1,6 +1,6 @@
 [
     {
-      "_id": "telepathyFeat123",
+      "_id": "telepathyFeat001",
       "name": "Mind Link",
       "type": "feat",
       "system": {
@@ -11,7 +11,7 @@
       }
     },
     {
-      "_id": "telepathMind456",
+      "_id": "telepathyFeat002",
       "name": "Mind Probe",
       "type": "feat",
       "system": {
@@ -24,7 +24,7 @@
       }
     },
     {
-      "_id": "telepathArea789",
+      "_id": "telepathyFeat003",
       "name": "Area Whisper",
       "type": "feat",
       "system": {
@@ -37,7 +37,7 @@
       }
     },
     {
-      "_id": "telepathDom1011",
+      "_id": "telepathyFeat004",
       "name": "Dominate Mind",
       "type": "feat",
       "system": {
@@ -51,7 +51,7 @@
       }
     },
     {
-      "_id": "telepathLink121",
+      "_id": "telepathyFeat005",
       "name": "Telepathic Network",
       "type": "feat",
       "system": {
@@ -64,7 +64,7 @@
       }
     },
     {
-      "_id": "telepathMass131",
+      "_id": "telepathyFeat006",
       "name": "Mass Domination",
       "type": "feat",
       "system": {
@@ -78,7 +78,7 @@
       }
     },
     {
-      "_id": "psychokinFeat123",
+      "_id": "psychokinFeat001",
       "name": "Kinetic Push",
       "type": "feat",
       "system": {
@@ -90,7 +90,7 @@
       }
     },
     {
-      "_id": "psychokinLift456",
+      "_id": "psychokinFeat002",
       "name": "Telekinetic Lift",
       "type": "feat",
       "system": {
@@ -102,7 +102,7 @@
       }
     },
     {
-      "_id": "psychokinBarr789",
+      "_id": "psychokinFeat003",
       "name": "Force Barrier",
       "type": "feat",
       "system": {
@@ -115,7 +115,7 @@
       }
     },
     {
-      "_id": "psychokinCr1011",
+      "_id": "psychokinFeat004",
       "name": "Crushing Grip",
       "type": "feat",
       "system": {
@@ -128,7 +128,7 @@
       }
     },
     {
-      "_id": "psychokinFli121",
+      "_id": "psychokinFeat005",
       "name": "Flight",
       "type": "feat",
       "system": {
@@ -140,7 +140,7 @@
       }
     },
     {
-      "_id": "psychokinSto131",
+      "_id": "psychokinFeat006",
       "name": "Kinetic Storm",
       "type": "feat",
       "system": {

@@ -14,7 +14,7 @@
             "_id": "telepathyFeat001",
             "type": "ItemGrant",
             "configuration": {
-              "items": ["telepathyFeat123"],
+              "items": ["telepathyFeat001"],
               "optional": false
             },
             "value": {},
@@ -25,7 +25,7 @@
             "_id": "telepathyFeat003",
             "type": "ItemGrant",
             "configuration": {
-              "items": ["telepathMind456"],
+              "items": ["telepathyFeat002"],
               "optional": false
             },
             "value": {},
@@ -36,7 +36,7 @@
             "_id": "telepathyFeat006",
             "type": "ItemGrant",
             "configuration": {
-              "items": ["telepathArea789"],
+              "items": ["telepathyFeat003"],
               "optional": false
             },
             "value": {},
@@ -47,7 +47,7 @@
             "_id": "telepathyFeat010",
             "type": "ItemGrant",
             "configuration": {
-              "items": ["telepathDom1011"],
+              "items": ["telepathyFeat004"],
               "optional": false
             },
             "value": {},
@@ -58,7 +58,7 @@
             "_id": "telepathyFeat014",
             "type": "ItemGrant",
             "configuration": {
-              "items": ["telepathLink121"],
+              "items": ["telepathyFeat005"],
               "optional": false
             },
             "value": {},
@@ -69,7 +69,7 @@
             "_id": "telepathyFeat018",
             "type": "ItemGrant",
             "configuration": {
-              "items": ["telepathMass131"],
+              "items": ["telepathyFeat006"],
               "optional": false
             },
             "value": {},
@@ -94,7 +94,7 @@
             "_id": "psychokinFeat001",
             "type": "ItemGrant",
             "configuration": {
-              "items": ["psychokinFeat123"],
+              "items": ["psychokinFeat001"],
               "optional": false
             },
             "value": {},
@@ -105,7 +105,7 @@
             "_id": "psychokinFeat003",
             "type": "ItemGrant",
             "configuration": {
-              "items": ["psychokinLift456"],
+              "items": ["psychokinFeat002"],
               "optional": false
             },
             "value": {},
@@ -116,7 +116,7 @@
             "_id": "psychokinFeat006",
             "type": "ItemGrant",
             "configuration": {
-              "items": ["psychokinBarr789"],
+              "items": ["psychokinFeat003"],
               "optional": false
             },
             "value": {},
@@ -127,7 +127,7 @@
             "_id": "psychokinFeat010",
             "type": "ItemGrant",
             "configuration": {
-              "items": ["psychokinCr1011"],
+              "items": ["psychokinFeat004"],
               "optional": false
             },
             "value": {},
@@ -138,7 +138,7 @@
             "_id": "psychokinFeat014",
             "type": "ItemGrant",
             "configuration": {
-              "items": ["psychokinFli121"],
+              "items": ["psychokinFeat005"],
               "optional": false
             },
             "value": {},
@@ -149,7 +149,7 @@
             "_id": "psychokinFeat018",
             "type": "ItemGrant",
             "configuration": {
-              "items": ["psychokinSto131"],
+              "items": ["psychokinFeat006"],
               "optional": false
             },
             "value": {},

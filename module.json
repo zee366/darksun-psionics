@@ -34,7 +34,7 @@
     {
       "name": "psionicist",
       "label": "Psionicist Class",
-      "path": "./packs/psionicist.json",
+      "path": "./packs/psionicist",
       "type": "Item",
       "system": "dnd5e",
       "ownership": {

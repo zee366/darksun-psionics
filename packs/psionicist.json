@@ -1,6 +1,6 @@
 [
   {
-    "_id": "psncstClass12345",
+    "_id": "668a0c050f724db6",
     "name": "Psionicist",
     "type": "class",
     "system": {
@@ -13,12 +13,6 @@
       "levels": 1,
       "hitDice": "d8",
       "hitDiceUsed": 0,
-      "saves": ["int", "wis"],
-      "skills": {
-        "number": 2,
-        "choices": ["arcana", "history", "insight", "investigation", "perception", "persuasion"],
-        "value": []
-      },
       "resources": {
         "primary": {
           "label": "Power Points",
@@ -31,14 +25,121 @@
       "advancement": [
         {
           "type": "HitPoints",
-          "configuration": { "hitDice": "d8" },
+          "configuration": {},
           "value": {},
           "title": "Hit Points"
         },
         {
+          "_id": "svCkv1ECxsmu2Q7U",
+          "type": "Trait",
+          "configuration": {
+            "mode": "default",
+            "allowReplacements": false,
+            "grants": [
+              "armor:lgt"
+            ],
+            "choices": []
+          },
+          "level": 1,
+          "title": "",
+          "value": {
+            "chosen": []
+          }
+        },
+        {
+          "_id": "1878ff96665d44c4",
+          "type": "Trait",
+          "configuration": {
+            "mode": "default",
+            "allowReplacements": false,
+            "grants": [
+              "armor:med"
+            ],
+            "choices": []
+          },
+          "level": 6,
+          "title": "",
+          "value": {
+            "chosen": []
+          }
+        },
+        {
+          "_id": "hZPJWA6MdmFIZuQD",
+          "type": "Trait",
+          "configuration": {
+            "mode": "default",
+            "allowReplacements": false,
+            "grants": [
+              "weapon:sim",
+              "weapon:mar:handcrossbow",
+              "weapon:mar:longsword",
+              "weapon:mar:rapier",
+              "weapon:mar:shortsword"
+            ],
+            "choices": []
+          },
+          "level": 1,
+          "title": "",
+          "classRestriction": "primary",
+          "value": {
+            "chosen": []
+          }
+        },
+        {
+          "_id": "wVBCjoHg0ftdHj3m",
+          "type": "Trait",
+          "configuration": {
+            "mode": "default",
+            "allowReplacements": false,
+            "grants": [
+              "saves:wis",
+              "saves:con"
+            ],
+            "choices": []
+          },
+          "level": 1,
+          "title": "",
+          "classRestriction": "primary",
+          "value": {
+            "chosen": []
+          }
+        },
+        {
+          "_id": "eNU6FoX5sNVbDx13",
+          "type": "Trait",
+          "configuration": {
+            "mode": "default",
+            "allowReplacements": false,
+            "grants": [],
+            "choices": [
+              {
+                "count": 2,
+                "pool": [
+                  "skills:arc",
+                  "skills:his",
+                  "skills:ins",
+                  "skills:inv",
+                  "skills:prc",
+                  "skills:per"
+                ]
+              }
+            ]
+          },
+          "level": 1,
+          "title": "",
+          "classRestriction": "primary",
+          "value": {
+            "chosen": []
+          }
+        },
+        {
           "type": "ClassLevel",
-          "configuration": { "maximum": 20 },
-          "value": { "level": 1 },
+          "configuration": {
+            "maximum": 20
+          },
+          "value": {
+            "level": 1
+          },
           "title": "Psionicist Level"
         },
         {
@@ -52,77 +153,142 @@
               "16": 83, "17": 94, "18": 94, "19": 107, "20": 114
             }
           },
-          "value": { "level": 1 },
+          "value": {
+            "level": 1
+          },
           "title": "Power Points Progression"
         },
         {
-          "_id": "psionicistAdvc01",
+          "_id": "07ec6d76840d4733",
           "type": "ItemGrant",
-          "configuration": { "items": ["psionicistFeat01"], "optional": false },
+          "configuration": {
+            "items": [
+              {
+                "uuid": "071e89deb3134f24",
+                "optional": false
+              }
+            ]
+          },
           "value": {},
           "level": 1,
           "title": "Psionic Focus"
         },
         {
-          "_id": "psionicistPowers1",
+          "_id": "e0580d1359e04f3f",
           "type": "ItemGrant",
-          "configuration": { "items": ["psionicPower0001", "psionicPower0002"], "optional": true },
-          "value": {},
-          "level": 1,
-          "title": "Psionic Powers"
-        },
-        {
-          "_id": "psionicistAdvc02",
-          "type": "ItemGrant",
-          "configuration": { "items": ["psionicistFeat02"], "optional": false },
+          "configuration": {
+            "items": [
+              {
+                "uuid": "c318450241af4d72",
+                "optional": false
+              }
+            ]
+          },
           "value": {},
           "level": 2,
           "title": "Mental Resistance"
         },
         {
-          "_id": "psionicistAdvc05",
+          "_id": "32557b9896a24c1a",
           "type": "ItemGrant",
-          "configuration": { "items": ["psionicistFeat03"], "optional": false },
+          "configuration": {
+            "items": [
+              {
+                "uuid": "9b0dc1e0f1d94080",
+                "optional": false
+              }
+            ]
+          },
           "value": {},
           "level": 5,
           "title": "Psionic Surge"
         },
         {
-          "_id": "psionicistAdvc09",
+          "_id": "20fca26f49fd4103",
           "type": "ItemGrant",
-          "configuration": { "items": ["psionicistFeat04"], "optional": false },
+          "configuration": {
+            "items": [
+              {
+                "uuid": "2a7cca8c7b94467f",
+                "optional": false
+              }
+            ]
+          },
           "value": {},
           "level": 9,
           "title": "Mind Over Matter"
         },
         {
-          "_id": "psionicistAdvc13",
+          "_id": "37a642e5259f405e",
           "type": "ItemGrant",
-          "configuration": { "items": ["psionicistFeat05"], "optional": false },
+          "configuration": {
+            "items": [
+              {
+                "uuid": "1eb51aa6a8454db6",
+                "optional": false
+              }
+            ]
+          },
           "value": {},
           "level": 13,
           "title": "Psychic Backlash"
         },
         {
-          "_id": "psionicistAdvc17",
+          "_id": "1f051ea78d774d55",
           "type": "ItemGrant",
-          "configuration": { "items": ["psionicistFeat06"], "optional": false },
+          "configuration": {
+            "items": [
+              {
+                "uuid": "d09baa034f824df9",
+                "optional": false
+              }
+            ]
+          },
           "value": {},
           "level": 17,
           "title": "Psionic Mastery"
         },
         {
-          "_id": "psionicistAdvc20",
+          "_id": "32facc33238e4472",
           "type": "ItemGrant",
-          "configuration": { "items": ["psionicistFeat07"], "optional": false },
+          "configuration": {
+            "items": [
+              {
+                "uuid": "c85111e59d0548cc",
+                "optional": false
+              }
+            ]
+          },
           "value": {},
           "level": 20,
           "title": "Unity of Mind"
+        },
+        {
+          "_id": "a897b3b8971a4729",
+          "type": "ItemGrant",
+          "configuration": {
+            "items": [
+              {
+                "uuid": "7b9d9275ea76435d",
+                "optional": true
+              },
+              {
+                "uuid": "ea949afcb5e44677",
+                "optional": true
+              }
+            ]
+          },
+          "value": {},
+          "level": 1,
+          "title": "Psionic Powers"
         }
       ],
-      "proficiencies": {
-        "armor": ["light"],
-        "weapons": ["simple"]
+      "startingEquipment": [
+      ],
+      "wealth": "2d4 * 10",
+      "primaryAbility": {
+        "value": [],
+        "all": true
       },
       "subclass": {
         "identifier": "psionic-discipline",

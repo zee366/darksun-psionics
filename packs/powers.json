@@ -1,6 +1,6 @@
 [
     {
-      "_id": "psionicPower0001",
+      "_id": "7b9d9275ea76435d",
       "name": "Detect Psionics",
       "type": "spell",
       "system": {
@@ -15,7 +15,7 @@
       }
     },
     {
-      "_id": "psionicPower0002",
+      "_id": "ea949afcb5e44677",
       "name": "Energy Pulse",
       "type": "spell",
       "system": {
@@ -30,7 +30,7 @@
       }
     },
     {
-      "_id": "psionicPower0003",
+      "_id": "6833f7abeb7e48fb",
       "name": "Mind Whisper",
       "type": "spell",
       "system": {
@@ -44,7 +44,7 @@
       }
     },
     {
-      "_id": "psionicPower0004",
+      "_id": "084c02efd47c4e1b",
       "name": "Mental Shield",
       "type": "spell",
       "system": {

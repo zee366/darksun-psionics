@@ -1,6 +1,6 @@
 [
     {
-      "_id": "psionicistFeat01",
+      "_id": "071e89deb3134f24",
       "name": "Psionic Focus",
       "type": "feat",
       "system": {
@@ -10,7 +10,7 @@
       }
     },
     {
-      "_id": "psionicistFeat02",
+      "_id": "c318450241af4d72",
       "name": "Mental Resistance",
       "type": "feat",
       "system": {
@@ -20,7 +20,7 @@
       }
     },
     {
-      "_id": "psionicistFeat03",
+      "_id": "9b0dc1e0f1d94080",
       "name": "Psionic Surge",
       "type": "feat",
       "system": {
@@ -30,7 +30,7 @@
       }
     },
     {
-      "_id": "psionicistFeat04",
+      "_id": "2a7cca8c7b94467f",
       "name": "Mind Over Matter",
       "type": "feat",
       "system": {
@@ -41,7 +41,7 @@
       }
     },
     {
-      "_id": "psionicistFeat05",
+      "_id": "1eb51aa6a8454db6",
       "name": "Psychic Backlash",
       "type": "feat",
       "system": {
@@ -52,7 +52,7 @@
       }
     },
     {
-      "_id": "psionicistFeat06",
+      "_id": "d09baa034f824df9",
       "name": "Psionic Mastery",
       "type": "feat",
       "system": {
@@ -62,7 +62,7 @@
       }
     },
     {
-      "_id": "psionicistFeat07",
+      "_id": "c85111e59d0548cc",
       "name": "Unity of Mind",
       "type": "feat",
       "system": {

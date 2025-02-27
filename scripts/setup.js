@@ -1,3 +1,7 @@
+Hooks.once("init", () => {
+  loadCSS("styles/darksun-psionics.css");
+});
+
 Hooks.once("ready", async () => {
     if (!game.user.isGM) {
       console.log("Skipping compendium population - not GM.");
@@ -294,10 +298,10 @@ Hooks.once("ready", async () => {
             <input type="text" name="actor.system.resources.primary.value" data-dtype="Number" 
                   placeholder="0" value="${pp.value}" hidden>
           </div>
-          <<!-- <div class="tmp">
+          <!-- <div class="tmp">
             <input type="text" name="system.psionics.pp.temp" data-dtype="Number" 
                   placeholder="TMP" value="${pp.temp || ''}">
-          </div> -->>
+          </div> -->
         </div>
       </div>
     `;

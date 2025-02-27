@@ -57,44 +57,44 @@ Hooks.once("ready", async () => {
       console.log(`Set Power Points to ${powerPoints} for ${actor.name}`);
   
       // Skill Selection Prompt
-      const skillChoices = ["arcana", "history", "insight", "investigation", "perception", "persuasion"];
-      const currentSkills = actor.system.skills.value || [];
-      if (currentSkills.length < 2 && !options.skipSkillPrompt) {
-        const selectedSkills = await new Promise(resolve => {
-          new Dialog({
-            title: "Choose Psionicist Skills",
-            content: `
-              <p>Select 2 skills for your Psionicist:</p>
-              <select multiple id="skillChoices" size="6">
-                ${skillChoices.map(skill => `
-                  <option value="${skill}" ${currentSkills.includes(skill) ? "selected" : ""}>
-                    ${skill.charAt(0).toUpperCase() + skill.slice(1)}
-                  </option>
-                `).join("")}
-              </select>
-            `,
-            buttons: {
-              ok: {
-                label: "Confirm",
-                callback: html => {
-                  const selected = Array.from(html.find("#skillChoices")[0].selectedOptions).map(option => option.value);
-                  if (selected.length !== 2) {
-                    ui.notifications.warn("Please select exactly 2 skills.");
-                    resolve(null);
-                  } else {
-                    resolve(selected);
-                  }
-                }
-              }
-            },
-            default: "ok"
-          }).render(true);
-        });
-        if (selectedSkills) {
-          await actor.update({ "system.skills.value": selectedSkills });
-          console.log(`Set skills for ${actor.name}:`, selectedSkills);
-        }
-      }
+      // const skillChoices = ["arcana", "history", "insight", "investigation", "perception", "persuasion"];
+      // const currentSkills = actor.system.skills.value || [];
+      // if (currentSkills.length < 2 && !options.skipSkillPrompt) {
+      //   const selectedSkills = await new Promise(resolve => {
+      //     new Dialog({
+      //       title: "Choose Psionicist Skills",
+      //       content: `
+      //         <p>Select 2 skills for your Psionicist:</p>
+      //         <select multiple id="skillChoices" size="6">
+      //           ${skillChoices.map(skill => `
+      //             <option value="${skill}" ${currentSkills.includes(skill) ? "selected" : ""}>
+      //               ${skill.charAt(0).toUpperCase() + skill.slice(1)}
+      //             </option>
+      //           `).join("")}
+      //         </select>
+      //       `,
+      //       buttons: {
+      //         ok: {
+      //           label: "Confirm",
+      //           callback: html => {
+      //             const selected = Array.from(html.find("#skillChoices")[0].selectedOptions).map(option => option.value);
+      //             if (selected.length !== 2) {
+      //               ui.notifications.warn("Please select exactly 2 skills.");
+      //               resolve(null);
+      //             } else {
+      //               resolve(selected);
+      //             }
+      //           }
+      //         }
+      //       },
+      //       default: "ok"
+      //     }).render(true);
+      //   });
+      //   if (selectedSkills) {
+      //     await actor.update({ "system.skills.value": selectedSkills });
+      //     console.log(`Set skills for ${actor.name}:`, selectedSkills);
+      //   }
+      // }
   
       const subclassPack = game.packs.get("darksun-psionics.subclasses");
       const featurePack = game.packs.get("darksun-psionics.features");
@@ -266,31 +266,68 @@ Hooks.once("ready", async () => {
   
   Hooks.on("renderActorSheet", (sheet, html) => {
     if (sheet.constructor.name !== "ActorSheet5eCharacter") return;
+    
     const actor = sheet.actor;
-    if (actor.classes.psionicist) {
-      const powerPoints = actor.system.resources.primary;
-      if (powerPoints.label === "Power Points") {
-        let resources = html.find(".resources");
-        if (!resources.length) {
-          resources = $('<div class="resources flexrow"></div>');
-          const attributes = html.find(".attributes");
-          if (attributes.length) {
-            attributes.append(resources);
-          } else {
-            html.find(".center-pane").append(resources);
-          }
-        }
-        resources.html(`
-          <div class="resource flex-group-center">
-            <label>Power Points</label>
-            <input type="text" value="${powerPoints.value}/${powerPoints.max}" readonly>
+    if (!actor.classes.psionicist) return;
+
+    const pp = actor.system.resources.primary;
+    const pct = Math.round((pp.value / pp.max) * 100);
+    
+    const ppHtml = `
+      <div class="meter-group">
+        <div class="label roboto-condensed-upper">
+          <span>Power Points</span>
+          {{#if sheet.isEditable}}
+          <a class="config-button" data-action="powerPoints" data-tooltip="Power Points Config" aria-label="Configure Power Points">
+            <i class="fas fa-cog"></i>
+          </a>
+          {{/if}}
+        </div>
+        <div class="meter sectioned power-points">
+          <div class="progress power-points" role="meter" 
+              aria-valuemin="0" aria-valuenow="${pp.value}" aria-valuemax="${pp.max}" 
+              style="--bar-percentage: ${pct}%">
+            <div class="label">
+              <span class="value">${pp.value}</span>
+              <span class="separator">/</span>
+              <span class="max">${pp.max}</span>
+            </div>
+            <input type="text" name="actor.system.resources.primary.value" data-dtype="Number" 
+                  placeholder="0" value="${pp.value}" hidden>
           </div>
-        `);
-  
-        const subclass = actor.items.find(i => i.type === "subclass" && i.system.classIdentifier === "psionicist");
-        if (subclass) {
-          html.find(".class .item-name h4").append(` (${subclass.name})`);
-        }
-      }
+          {{!-- <div class="tmp">
+            <input type="text" name="system.psionics.pp.temp" data-dtype="Number" 
+                  placeholder="TMP" value="${pp.temp || ''}">
+          </div> --}}
+        </div>
+      </div>
+    `;
+
+    // Inject the power points meter after the hit points section
+    const hpMeter = html.find(".meter-group:has(.hit-points)");
+    if (hpMeter.length) {
+      hpMeter.after(ppHtml);
+    }
+
+    // let resources = html.find(".resources");
+    // if (!resources.length) {
+    //   resources = $('<div class="resources flexrow"></div>');
+    //   const attributes = html.find(".attributes");
+    //   if (attributes.length) {
+    //     attributes.append(resources);
+    //   } else {
+    //     html.find(".center-pane").append(resources);
+    //   }
+    // }
+    // resources.html(`
+    //   <div class="resource flex-group-center">
+    //     <label>Power Points</label>
+    //     <input type="text" value="${powerPoints.value}/${powerPoints.max}" readonly>
+    //   </div>
+    // `);
+
+    const subclass = actor.items.find(i => i.type === "subclass" && i.system.classIdentifier === "psionicist");
+    if (subclass) {
+      html.find(".class .item-name h4").append(` (${subclass.name})`);
     }
   });

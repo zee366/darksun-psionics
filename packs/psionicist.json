@@ -281,6 +281,116 @@
           "value": {},
           "level": 1,
           "title": "Psionic Powers"
+        },
+        {
+          "_id": "7457e1e0d9e74e1d",
+          "type": "AbilityScoreImprovement",
+          "configuration": {
+            "points": 2,
+            "fixed": {
+              "str": 0,
+              "dex": 0,
+              "con": 0,
+              "int": 0,
+              "wis": 0,
+              "cha": 0
+            },
+            "cap": 2,
+            "locked": []
+          },
+          "value": {
+            "type": "asi"
+          },
+          "level": 4,
+          "title": ""
+        },
+        {
+          "_id": "fcf4b72db840450b",
+          "type": "AbilityScoreImprovement",
+          "configuration": {
+            "points": 2,
+            "fixed": {
+              "str": 0,
+              "dex": 0,
+              "con": 0,
+              "int": 0,
+              "wis": 0,
+              "cha": 0
+            },
+            "cap": 2,
+            "locked": []
+          },
+          "value": {
+            "type": "asi"
+          },
+          "level": 8,
+          "title": ""
+        },
+        {
+          "_id": "3f1b8714f6ab4153",
+          "type": "AbilityScoreImprovement",
+          "configuration": {
+            "points": 2,
+            "fixed": {
+              "str": 0,
+              "dex": 0,
+              "con": 0,
+              "int": 0,
+              "wis": 0,
+              "cha": 0
+            },
+            "cap": 2,
+            "locked": []
+          },
+          "value": {
+            "type": "asi"
+          },
+          "level": 12,
+          "title": ""
+        },
+        {
+          "_id": "0f7849f9d54f413c",
+          "type": "AbilityScoreImprovement",
+          "configuration": {
+            "points": 2,
+            "fixed": {
+              "str": 0,
+              "dex": 0,
+              "con": 0,
+              "int": 0,
+              "wis": 0,
+              "cha": 0
+            },
+            "cap": 2,
+            "locked": []
+          },
+          "value": {
+            "type": "asi"
+          },
+          "level": 16,
+          "title": ""
+        },
+        {
+          "_id": "6493fd35eebb4283",
+          "type": "AbilityScoreImprovement",
+          "configuration": {
+            "points": 2,
+            "fixed": {
+              "str": 0,
+              "dex": 0,
+              "con": 0,
+              "int": 0,
+              "wis": 0,
+              "cha": 0
+            },
+            "cap": 2,
+            "locked": []
+          },
+          "value": {
+            "type": "asi"
+          },
+          "level": 19,
+          "title": ""
         }
       ],
       "startingEquipment": [

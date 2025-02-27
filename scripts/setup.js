@@ -265,7 +265,7 @@ Hooks.once("ready", async () => {
   });
   
   Hooks.on("renderActorSheet", (sheet, html) => {
-    if (sheet.constructor.name !== "ActorSheet5eCharacter") return;
+    if (sheet.constructor.name !== "ActorSheet5eCharacter2") return;
     
     const actor = sheet.actor;
     if (!actor.classes.psionicist) return;

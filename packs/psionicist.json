@@ -5,7 +5,7 @@
     "type": "class",
     "system": {
       "description": {
-        "value": "<p>The Psionicist harnesses the power of the mind to shape reality, drawing from the harsh psychic traditions of Athas.</p>",
+        "value": "<p>The Psionicist harnesses the power of the mind to shape reality, drawing from the harsh psychic traditions of Athas. They wield weapons as extensions of their will, favoring precision over brute force.</p>",
         "chat": "",
         "source": "Dark Sun Psionics Module"
       },
@@ -16,7 +16,7 @@
       "resources": {
         "primary": {
           "label": "Power Points",
-          "lr": false,
+          "lr": true,
           "max": 2,
           "sr": false,
           "value": 2
@@ -71,16 +71,14 @@
             "allowReplacements": false,
             "grants": [
               "weapon:sim",
-              "weapon:mar:handcrossbow",
-              "weapon:mar:longsword",
-              "weapon:mar:rapier",
-              "weapon:mar:shortsword"
+              "weapon:mar:shortsword",
+              "weapon:mar:spear",
+              "weapon:mar:whip"
             ],
             "choices": []
           },
           "level": 1,
-          "title": "",
-          "classRestriction": "primary",
+          "title": "Psionic Weapon Training",
           "value": {
             "chosen": []
           }
@@ -148,9 +146,9 @@
             "label": "Power Points",
             "resource": "primary",
             "value": {
-              "1": 2, "2": 4, "3": 6, "4": 14, "5": 17, "6": 27, "7": 32, "8": 38,
-              "9": 44, "10": 57, "11": 64, "12": 64, "13": 73, "14": 73, "15": 83,
-              "16": 83, "17": 94, "18": 94, "19": 107, "20": 114
+              "1": 2, "2": 4, "3": 6, "4": 10, "5": 14, "6": 20, "7": 25, "8": 30,
+              "9": 36, "10": 44, "11": 52, "12": 52, "13": 60, "14": 60, "15": 70,
+              "16": 70, "17": 80, "18": 80, "19": 90, "20": 100
             }
           },
           "value": {
@@ -187,6 +185,17 @@
           "value": {},
           "level": 2,
           "title": "Mental Resistance"
+        },
+        {
+          "_id": "c7e2403985ed48cd",
+          "type": "Subclass",
+          "configuration": {
+            "identifier": "psionic-discipline",
+            "label": "Psionic Discipline"
+          },
+          "value": {},
+          "level": 5,
+          "title": "Psionic Discipline Selection"
         },
         {
           "_id": "32557b9896a24c1a",
@@ -270,11 +279,19 @@
             "items": [
               {
                 "uuid": "7b9d9275ea76435d",
-                "optional": true
+                "optional": false
               },
               {
                 "uuid": "ea949afcb5e44677",
-                "optional": true
+                "optional": false
+              },
+              {
+                "uuid": "6833f7abeb7e48fb",
+                "optional": false
+              },
+              {
+                "uuid": "084c02efd47c4e1b",
+                "optional": false
               }
             ]
           },
@@ -399,10 +416,6 @@
       "primaryAbility": {
         "value": [],
         "all": true
-      },
-      "subclass": {
-        "identifier": "psionic-discipline",
-        "label": "Psionic Discipline"
       }
     },
     "img": "modules/darksun-psionics/icons/psionicist.png",

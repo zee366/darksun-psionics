@@ -1,7 +1,3 @@
-.meter-group .power-points .progress {
+.meter-group .power-points .progress.power-points {
     --bar-color: #ffff1e;
-}
-
-.meter-group .power-points {
-    background-color: lightblue; /* Temporary test */
 }

@@ -160,12 +160,7 @@
           "_id": "07ec6d76840d4733",
           "type": "ItemGrant",
           "configuration": {
-            "items": [
-              {
-                "uuid": "071e89deb3134f24",
-                "optional": false
-              }
-            ]
+            "items": [{"uuid": "071e89deb3134f24", "optional": false}]
           },
           "value": {},
           "level": 1,
@@ -175,16 +170,31 @@
           "_id": "e0580d1359e04f3f",
           "type": "ItemGrant",
           "configuration": {
-            "items": [
-              {
-                "uuid": "c318450241af4d72",
-                "optional": false
-              }
-            ]
+            "items": [{"uuid": "c318450241af4d72", "optional": false}]
           },
           "value": {},
           "level": 2,
           "title": "Mental Resistance"
+        },
+        {
+          "_id": "49f2155c1b5c49c8",
+          "type": "ItemGrant",
+          "configuration": {
+            "items": [{"uuid": "2d2905b23e4f4b10", "optional": false}]
+          },
+          "value": {},
+          "level": 3,
+          "title": "Mindful Defense"
+        },
+        {
+          "_id": "32557b9896a24c1a",
+          "type": "ItemGrant",
+          "configuration": {
+            "items": [{"uuid": "9b0dc1e0f1d94080", "optional": false}]
+          },
+          "value": {},
+          "level": 5,
+          "title": "Psionic Surge"
         },
         {
           "_id": "c7e2403985ed48cd",
@@ -198,19 +208,24 @@
           "title": "Psionic Discipline Selection"
         },
         {
-          "_id": "32557b9896a24c1a",
+          "_id": "6bae618490334221",
           "type": "ItemGrant",
           "configuration": {
-            "items": [
-              {
-                "uuid": "9b0dc1e0f1d94080",
-                "optional": false
-              }
-            ]
+            "items": [{"uuid": "1fcca3f6bab64bee", "optional": false}]
           },
           "value": {},
-          "level": 5,
-          "title": "Psionic Surge"
+          "level": 7,
+          "title": "Psychic Assault"
+        },
+        {
+          "_id": "227d1dcfa5ec4971",
+          "type": "ItemGrant",
+          "configuration": {
+            "items": [{"uuid": "ef920cda0f604127", "optional": false}]
+          },
+          "value": {},
+          "level": 7,
+          "title": "Psychic Combat"
         },
         {
           "_id": "20fca26f49fd4103",
@@ -228,6 +243,26 @@
           "title": "Mind Over Matter"
         },
         {
+          "_id": "218e3ae9ae3f4852",
+          "type": "ItemGrant",
+          "configuration": {
+            "items": [{"uuid": "44792b7918fe4cec", "optional": false}]
+          },
+          "value": {},
+          "level": 10,
+          "title": "Mental Fortress"
+        },
+        {
+          "_id": "d31ec7e14bb44c79",
+          "type": "ItemGrant",
+          "configuration": {
+            "items": [{"uuid": "625cbfffb15b4136", "optional": false}]
+          },
+          "value": {},
+          "level": 11,
+          "title": "Power Maintenance"
+        },
+        {
           "_id": "37a642e5259f405e",
           "type": "ItemGrant",
           "configuration": {
@@ -243,6 +278,16 @@
           "title": "Psychic Backlash"
         },
         {
+          "_id": "75f6f77425104de0",
+          "type": "ItemGrant",
+          "configuration": {
+            "items": [{"uuid": "566902bd45a0445f", "optional": false}]
+          },
+          "value": {},
+          "level": 14,
+          "title": "Psionic Reach"
+        },
+        {
           "_id": "1f051ea78d774d55",
           "type": "ItemGrant",
           "configuration": {
@@ -256,6 +301,16 @@
           "value": {},
           "level": 17,
           "title": "Psionic Mastery"
+        },
+        {
+          "_id": "ea46ba8deef142f9",
+          "type": "ItemGrant",
+          "configuration": {
+            "items": [{"uuid": "48711eea68cf4dac", "optional": false}]
+          },
+          "value": {},
+          "level": 18,
+          "title": "Overmind"
         },
         {
           "_id": "32facc33238e4472",
@@ -274,28 +329,22 @@
         },
         {
           "_id": "a897b3b8971a4729",
-          "type": "ItemGrant",
+          "type": "Trait",
           "configuration": {
-            "items": [
+            "mode": "default",
+            "grants": [],
+            "choices": [
               {
-                "uuid": "7b9d9275ea76435d",
-                "optional": false
-              },
-              {
-                "uuid": "ea949afcb5e44677",
-                "optional": false
-              },
-              {
-                "uuid": "6833f7abeb7e48fb",
-                "optional": false
-              },
-              {
-                "uuid": "084c02efd47c4e1b",
-                "optional": false
+                "count": 2,
+                "pool": [
+                  "item:7b9d9275ea76435d",
+                  "item:ea949afcb5e44677",
+                  "item:6833f7abeb7e48fb",
+                  "item:084c02efd47c4e1b"
+                ]
               }
             ]
           },
-          "value": {},
           "level": 1,
           "title": "Psionic Powers"
         },

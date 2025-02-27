@@ -1,3 +1,6 @@
+// next prompt
+//Hey, let’s pick up my Dark Sun Psionicist project for Foundry VTT 4.3.5. We’ve finished the core class in psionicist.json with features up to level 20, including Mindful Defense at 3, medium armor at 6, and Psionic Recovery at 15. The features are in psionicistfeatures.json, and the cantrip-like powers are in powers.json. Next, we’re working on Discipline Synergy for the level 5 subclass (Psionic Discipline) and planning a level 6 subclass feature.
+
 Hooks.once("ready", async () => {
     if (!game.user.isGM) {
       console.log("Skipping compendium population - not GM.");

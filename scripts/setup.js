@@ -99,119 +99,119 @@ Hooks.once("ready", async () => {
       //   }
       // }
   
-      const subclassPack = game.packs.get("darksun-psionics.subclasses");
-      const featurePack = game.packs.get("darksun-psionics.features");
-      await subclassPack.getIndex({ force: true });
-      const subclasses = await subclassPack.getDocuments();
-      const subclassOptions = subclasses.filter(s => s.type === "subclass" && s.system.classIdentifier === "psionicist");
-      if (!actor.items.find(i => i.type === "subclass" && i.system.classIdentifier === "psionicist")) {
-        const choice = await new Promise(resolve => {
-          new Dialog({
-            title: "Choose Psionic Discipline",
-            content: `
-              <p>Select your Psionic Discipline:</p>
-              <select id="subclass">
-                ${subclassOptions.map(s => `<option value="${s._id}">${s.name}</option>`).join("")}
-              </select>
-            `,
-            buttons: {
-              ok: {
-                label: "Confirm",
-                callback: html => resolve(html.find("#subclass").val())
-              }
-            }
-          }).render(true);
-        });
-        const subclass = subclassOptions.find(s => s._id === choice);
-        if (subclass) {
-          await actor.createEmbeddedDocuments("Item", [subclass.toObject()]);
-          console.log(`Added ${subclass.name} subclass to ${actor.name}`);
-          const subclassItem = actor.items.getName(subclass.name);
-          const advancements = subclassItem.system.advancement.filter(a => a.type === "ItemGrant" && a.level <= level);
-          console.log("Advancements to apply:", advancements);
-          const itemsToGrant = advancements.flatMap(a => a.configuration.items.map(item => item.uuid));
-          console.log("Items to grant (UUIDs):", itemsToGrant);
-          if (itemsToGrant.length > 0) {
-            await featurePack.getIndex({ force: true });
-            const items = [];
-            for (const id of itemsToGrant) {
-              const item = await featurePack.getDocument(id);
-              if (item) {
-                const itemData = item.toObject();
-                itemData.flags = itemData.flags || {};
-                itemData.flags.core = itemData.flags.core || {};
-                itemData.flags.core.sourceId = `Compendium.darksun-psionics.features.${id}`;
-                items.push(itemData);
-              }
-            }
-            console.log("Fetched items:", items.map(i => i.name));
-            if (items.length > 0) {
-              await actor.createEmbeddedDocuments("Item", items);
-              console.log(`Granted ${items.length} initial items for ${subclass.name}`);
-            } else {
-              console.log("No items fetched for granted UUIDs:", itemsToGrant);
-            }
-          } else {
-            console.log("No initial items found to grant.");
-          }
-        }
-      }
+      // const subclassPack = game.packs.get("darksun-psionics.subclasses");
+      // const featurePack = game.packs.get("darksun-psionics.features");
+      // await subclassPack.getIndex({ force: true });
+      // const subclasses = await subclassPack.getDocuments();
+      // const subclassOptions = subclasses.filter(s => s.type === "subclass" && s.system.classIdentifier === "psionicist");
+      // if (!actor.items.find(i => i.type === "subclass" && i.system.classIdentifier === "psionicist")) {
+      //   const choice = await new Promise(resolve => {
+      //     new Dialog({
+      //       title: "Choose Psionic Discipline",
+      //       content: `
+      //         <p>Select your Psionic Discipline:</p>
+      //         <select id="subclass">
+      //           ${subclassOptions.map(s => `<option value="${s._id}">${s.name}</option>`).join("")}
+      //         </select>
+      //       `,
+      //       buttons: {
+      //         ok: {
+      //           label: "Confirm",
+      //           callback: html => resolve(html.find("#subclass").val())
+      //         }
+      //       }
+      //     }).render(true);
+      //   });
+      //   const subclass = subclassOptions.find(s => s._id === choice);
+      //   if (subclass) {
+      //     await actor.createEmbeddedDocuments("Item", [subclass.toObject()]);
+      //     console.log(`Added ${subclass.name} subclass to ${actor.name}`);
+      //     const subclassItem = actor.items.getName(subclass.name);
+      //     const advancements = subclassItem.system.advancement.filter(a => a.type === "ItemGrant" && a.level <= level);
+      //     console.log("Advancements to apply:", advancements);
+      //     const itemsToGrant = advancements.flatMap(a => a.configuration.items.map(item => item.uuid));
+      //     console.log("Items to grant (UUIDs):", itemsToGrant);
+      //     if (itemsToGrant.length > 0) {
+      //       await featurePack.getIndex({ force: true });
+      //       const items = [];
+      //       for (const id of itemsToGrant) {
+      //         const item = await featurePack.getDocument(id);
+      //         if (item) {
+      //           const itemData = item.toObject();
+      //           itemData.flags = itemData.flags || {};
+      //           itemData.flags.core = itemData.flags.core || {};
+      //           itemData.flags.core.sourceId = `Compendium.darksun-psionics.features.${id}`;
+      //           items.push(itemData);
+      //         }
+      //       }
+      //       console.log("Fetched items:", items.map(i => i.name));
+      //       if (items.length > 0) {
+      //         await actor.createEmbeddedDocuments("Item", items);
+      //         console.log(`Granted ${items.length} initial items for ${subclass.name}`);
+      //       } else {
+      //         console.log("No items fetched for granted UUIDs:", itemsToGrant);
+      //       }
+      //     } else {
+      //       console.log("No initial items found to grant.");
+      //     }
+      //   }
+      // }
 
       // Power Selection Prompt
-      const powerPack = game.packs.get("darksun-psionics.powers");
-      await powerPack.getIndex({ force: true });
-      const powers = await powerPack.getDocuments();
-      const powerOptions = powers.filter(p => p.system.level === 1);
-      const currentPowers = actor.items.filter(i => i.type === "spell").map(i => i._id);
-      if (currentPowers.length < 2 && !options.skipPowerPrompt) {
-        const selectedPowers = await new Promise(resolve => {
-          new Dialog({
-            title: "Choose Psionic Powers",
-            content: `
-              <p>Select 2 level 1 psionic powers:</p>
-              <select multiple id="powerChoices" size="${powerOptions.length}">
-                ${powerOptions.map(power => `
-                  <option value="${power._id}" ${currentPowers.includes(power._id) ? "selected" : ""}>
-                    ${power.name}
-                  </option>
-                `).join("")}
-              </select>
-            `,
-            buttons: {
-              ok: {
-                label: "Confirm",
-                callback: html => {
-                  const selected = Array.from(html.find("#powerChoices")[0].selectedOptions).map(option => option.value);
-                  if (selected.length !== 2) {
-                    ui.notifications.warn("Please select exactly 2 powers.");
-                    resolve(null);
-                  } else {
-                    resolve(selected);
-                  }
-                }
-              }
-            },
-            default: "ok"
-          }).render(true);
-        });
-        if (selectedPowers) {
-          const items = [];
-          for (const id of selectedPowers) {
-            const power = powerOptions.find(p => p._id === id);
-            if (power) {
-              const powerData = power.toObject();
-              powerData.flags = powerData.flags || {};
-              powerData.flags.core = powerData.flags.core || {};
-              powerData.flags.core.sourceId = `Compendium.darksun-psionics.powers.${id}`;
-              items.push(powerData);
-            }
-          }
-          if (items.length > 0) {
-            await actor.createEmbeddedDocuments("Item", items);
-            console.log(`Granted ${items.length} powers to ${actor.name}:`, items.map(i => i.name));
-          }
-        }
-      }
+      // const powerPack = game.packs.get("darksun-psionics.powers");
+      // await powerPack.getIndex({ force: true });
+      // const powers = await powerPack.getDocuments();
+      // const powerOptions = powers.filter(p => p.system.level === 1);
+      // const currentPowers = actor.items.filter(i => i.type === "spell").map(i => i._id);
+      // if (currentPowers.length < 2 && !options.skipPowerPrompt) {
+      //   const selectedPowers = await new Promise(resolve => {
+      //     new Dialog({
+      //       title: "Choose Psionic Powers",
+      //       content: `
+      //         <p>Select 2 level 1 psionic powers:</p>
+      //         <select multiple id="powerChoices" size="${powerOptions.length}">
+      //           ${powerOptions.map(power => `
+      //             <option value="${power._id}" ${currentPowers.includes(power._id) ? "selected" : ""}>
+      //               ${power.name}
+      //             </option>
+      //           `).join("")}
+      //         </select>
+      //       `,
+      //       buttons: {
+      //         ok: {
+      //           label: "Confirm",
+      //           callback: html => {
+      //             const selected = Array.from(html.find("#powerChoices")[0].selectedOptions).map(option => option.value);
+      //             if (selected.length !== 2) {
+      //               ui.notifications.warn("Please select exactly 2 powers.");
+      //               resolve(null);
+      //             } else {
+      //               resolve(selected);
+      //             }
+      //           }
+      //         }
+      //       },
+      //       default: "ok"
+      //     }).render(true);
+      //   });
+      //   if (selectedPowers) {
+      //     const items = [];
+      //     for (const id of selectedPowers) {
+      //       const power = powerOptions.find(p => p._id === id);
+      //       if (power) {
+      //         const powerData = power.toObject();
+      //         powerData.flags = powerData.flags || {};
+      //         powerData.flags.core = powerData.flags.core || {};
+      //         powerData.flags.core.sourceId = `Compendium.darksun-psionics.powers.${id}`;
+      //         items.push(powerData);
+      //       }
+      //     }
+      //     if (items.length > 0) {
+      //       await actor.createEmbeddedDocuments("Item", items);
+      //       console.log(`Granted ${items.length} powers to ${actor.name}:`, items.map(i => i.name));
+      //     }
+      //   }
+      // }
       if (actor.sheet) actor.sheet.render(true);
     }
   });

@@ -298,8 +298,8 @@ Hooks.once("ready", async () => {
       </div>
     `;
 
-    // Inject the power points meter after the hit points section
-    const hpMeter = html.find(".meter-group:has(.hit-points)");
+    // Inject the power points meter after the hit dice section
+    const hpMeter = html.find(".meter-group:has(.hit-dice)");
     if (hpMeter.length) {
       hpMeter.after(ppHtml);
     }

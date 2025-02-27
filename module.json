@@ -29,7 +29,9 @@
   "esmodules": [
     "scripts/setup.js"
   ],
-  "styles": ["styles/darksun-psionics.css"],
+  "styles": [
+    "styles/darksun-psionics.css"
+  ],
   "packs": [
     {
       "name": "psionicist",

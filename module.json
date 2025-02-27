@@ -29,7 +29,7 @@
   "esmodules": [
     "scripts/setup.js"
   ],
-  "styles": [],
+  "styles": ["styles/darksun-psionics.css"],
   "packs": [
     {
       "name": "psionicist",

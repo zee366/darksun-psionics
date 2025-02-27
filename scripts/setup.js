@@ -1,7 +1,3 @@
-Hooks.once("init", () => {
-  loadCSS("styles/darksun-psionics.css");
-});
-
 Hooks.once("ready", async () => {
     if (!game.user.isGM) {
       console.log("Skipping compendium population - not GM.");
@@ -281,10 +277,6 @@ Hooks.once("ready", async () => {
       <div class="meter-group">
         <div class="label roboto-condensed-upper">
           <span>Power Points</span>
-          ${sheet.isEditable ? `
-          <a class="config-button" data-action="powerPoints" data-tooltip="Power Points Config" aria-label="Configure Power Points">
-            <i class="fas fa-cog"></i>
-          </a>` : ''}
         </div>
         <div class="meter sectioned power-points">
           <div class="progress power-points" role="meter" 

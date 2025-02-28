@@ -11,26 +11,15 @@
         "classIdentifier": "psionicist",
         "advancement": [
           {
-            "_id": "telepathyAdvc001",
+            "_id": "telepathyAdvc005",
             "type": "ItemGrant",
             "configuration": {
-              "items": ["telepathyFeat001"],
+              "items": ["telepathyFeat007"],
               "optional": false
             },
             "value": {},
-            "level": 1,
-            "title": "Mind Link"
-          },
-          {
-            "_id": "telepathyAdvc003",
-            "type": "ItemGrant",
-            "configuration": {
-              "items": ["telepathyFeat002"],
-              "optional": false
-            },
-            "value": {},
-            "level": 3,
-            "title": "Mind Probe"
+            "level": 5,
+            "title": "Telepathic Resonance"
           },
           {
             "_id": "telepathyAdvc006",

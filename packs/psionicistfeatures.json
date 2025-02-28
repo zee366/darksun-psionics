@@ -249,27 +249,19 @@
     }
   },
   {
-    "_id": "telepathyFeat001",
-    "name": "Mind Link",
+    "_id": "telepathyFeat007",
+    "name": "Telepathic Resonance",
     "type": "feat",
     "system": {
       "description": {
-        "value": "<p>You can establish a telepathic link with one willing creature within 30 feet, allowing silent communication for 1 minute. Costs 1 Power Point.</p>"
+        "value": "<p>Your mastery of telepathy amplifies your psionic powers by resonating with nearby minds. When you spend power points to activate a psionic power that targets a single creature and requires a saving throw, you can spend additional power points to enhance it:</p><ul><li><strong>Extended Reach:</strong> Spend 2 power points to target one additional creature within 30 feet of the original target. Both targets use the same saving throw result.</li><li><strong>Deepened Impact:</strong> Spend 3 power points to impose disadvantage on the original target's saving throw.</li></ul><p>You can use this feature a number of times equal to your Wisdom modifier (minimum 1), regaining all uses when you finish a long rest.</p>"
       },
-      "activation": { "type": "action", "cost": 1, "condition": "Target must be willing" }
-    }
-  },
-  {
-    "_id": "telepathyFeat002",
-    "name": "Mind Probe",
-    "type": "feat",
-    "system": {
-      "description": {
-        "value": "<p>You probe a creature’s mind within 30 feet, forcing it to make a DC 13 Wisdom saving throw (DC = 8 + your Intelligence modifier + proficiency bonus). On a failure, you learn one surface thought or memory. Costs 3 Power Points.</p>"
-      },
-      "activation": { "type": "action", "cost": 3 },
-      "target": { "type": "creature", "value": 1, "range": 30 },
-      "save": { "ability": "wis", "dc": 13 }
+      "source": "Dark Sun Psionics Module",
+      "activation": { "type": "bonus", "cost": 1, "condition": "When you spend power points on a psionic power targeting a single creature with a saving throw." },
+      "duration": { "value": null, "units": "inst" },
+      "target": { "value": 1, "type": "creature" },
+      "range": { "value": 30, "units": "feet" },
+      "uses": { "value": null, "max": "@wis.mod", "per": "lr" }
     }
   },
   {
@@ -278,11 +270,15 @@
     "type": "feat",
     "system": {
       "description": {
-        "value": "<p>You send a telepathic message to up to 5 willing creatures within 60 feet, lasting 10 minutes. Costs 6 Power Points.</p>"
+        "value": "<p>You overwhelm multiple minds with telepathic whispers. As an action, spend 5 power points to target up to 5 creatures you can see within 60 feet. Each must make a Wisdom saving throw (DC = 8 + your proficiency bonus + your Wisdom modifier). On a failed save, a creature is incapacitated until the end of its next turn. On a successful save, it is unaffected.</p><p>You can spend an additional 2 power points per extra target to increase the number of targets (maximum 10 targets).</p><p>Once you use this feature, you can’t use it again until you finish a short or long rest.</p>"
       },
-      "activation": { "type": "action", "cost": 6, "condition": "Targets must be willing" },
-      "target": { "type": "creature", "value": 5, "range": 60 },
-      "duration": { "value": 10, "units": "minute" }
+      "activation": { "type": "action", "cost": 1 },
+      "duration": { "value": 1, "units": "round" },
+      "target": { "value": 5, "units": "", "type": "creature" },
+      "range": { "value": 60, "long": null, "units": "ft" },
+      "uses": { "value": 1, "max": 1, "per": "sr", "recovery": "short or long rest" },
+      "consume": { "type": "attribute", "target": "powerPoints", "amount": 5, "optional": false },
+      "save": { "ability": "wis", "dc": "@mod.wis + @prof + 8", "scaling": "flat" }
     }
   },
   {

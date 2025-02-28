@@ -69,5 +69,69 @@
       "preparation": { "mode": "innate" },
       "actionType": "util"
     }
+  },
+  {
+    "_id": "mindLinkPower001",
+    "name": "Mind Link",
+    "type": "spell",
+    "system": {
+      "description": {
+        "value": "<p>You establish a telepathic link with one willing creature within 30 feet, allowing silent communication for 1 minute. Costs 1 power point.</p><p><strong>Enhancement:</strong> For each additional 1 power point spent, increase the duration by 1 minute (max 5 minutes) or target one additional willing creature (max 3 total).</p>"
+      },
+      "level": 0,
+      "activation": {
+        "type": "action",
+        "cost": 1,
+        "condition": "Target must be willing"
+      },
+      "duration": {
+        "value": 1,
+        "units": "minute"
+      },
+      "target": {
+        "type": "creature",
+        "value": 1
+      },
+      "range": {
+        "value": 30,
+        "units": "feet"
+      },
+      "preparation": {
+        "mode": "innate"
+      },
+      "actionType": "utility"
+    }
+  },
+  {
+    "_id": "mindProbePower002",
+    "name": "Mind Probe",
+    "type": "spell",
+    "system": {
+      "description": {
+        "value": "<p>You probe a creature’s mind within 30 feet, forcing it to make a Wisdom saving throw (DC = 8 + your proficiency bonus + your Intelligence modifier). On a failure, you learn one surface thought or memory. Costs 3 power points.</p><p><strong>Enhancement:</strong> For each additional 2 power points spent, increase the range by 30 feet (max 90 feet) or learn one additional thought or memory from a failed save (max 3 total).</p>"
+      },
+      "level": 0,
+      "activation": {
+        "type": "action",
+        "cost": 1
+      },
+      "target": {
+        "type": "creature",
+        "value": 1
+      },
+      "range": {
+        "value": 30,
+        "units": "feet"
+      },
+      "save": {
+        "ability": "wis",
+        "dc": "@mod.int + @prof + 8",
+        "scaling": "flat"
+      },
+      "preparation": {
+        "mode": "innate"
+      },
+      "actionType": "save"
+    }
   }
 ]

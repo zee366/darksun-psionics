@@ -2,13 +2,13 @@
   {
     "_id": "7b9d9275ea76435d",
     "name": "Detect Psionics",
-    "type": "spell",
+    "type": "power",
     "system": {
       "description": {
         "value": "<p>You sense psionic activity or creatures with psionic abilities within 30 feet for 1 minute. No power point cost.</p><p><strong>Enhancement:</strong> For each 1 power point spent, increase the range by 30 feet or the duration by 1 minute (choose one per point spent).</p>"
       },
       "level": 0,
-      "activation": { "type": "action", "cost": 0 },
+      "activation": { "type": "action", "cost": 1 },
       "duration": { "value": 1, "units": "minute" },
       "range": { "value": 30, "units": "feet" },
       "preparation": { "mode": "innate" },
@@ -18,13 +18,13 @@
   {
     "_id": "ea949afcb5e44677",
     "name": "Energy Pulse",
-    "type": "spell",
+    "type": "power",
     "system": {
       "description": {
         "value": "<p>You project a pulse of force at one creature within 30 feet, dealing 1d6 force damage. No power point cost.</p><p><strong>Enhancement:</strong> For each 1 power point spent, increase the damage by 1d6 (max 5d6) or the range by 30 feet (max 120 feet).</p>"
       },
       "level": 0,
-      "activation": { "type": "action", "cost": 0 },
+      "activation": { "type": "action", "cost": 1 },
       "target": { "type": "creature", "value": 1 },
       "range": { "value": 30, "units": "feet" },
       "damage": { "parts": [["1d6", "force"]] },
@@ -35,13 +35,13 @@
   {
     "_id": "6833f7abeb7e48fb",
     "name": "Mind Whisper",
-    "type": "spell",
+    "type": "power",
     "system": {
       "description": {
         "value": "<p>You send a short mental message (up to 10 words) to one creature within 60 feet that can understand you. No power point cost.</p><p><strong>Enhancement:</strong> For each 1 power point spent, increase the range by 60 feet or target one additional creature (max 5 total).</p>"
       },
       "level": 0,
-      "activation": { "type": "action", "cost": 0 },
+      "activation": { "type": "action", "cost": 1 },
       "target": { "type": "creature", "value": 1 },
       "range": { "value": 60, "units": "feet" },
       "preparation": { "mode": "innate" },
@@ -51,7 +51,7 @@
   {
     "_id": "084c02efd47c4e1b",
     "name": "Mental Shield",
-    "type": "spell",
+    "type": "power",
     "system": {
       "description": {
         "value": "<p>As a reaction when targeted by an attack, gain +2 AC until the start of your next turn. No power point cost.</p><p><strong>Enhancement:</strong> For each 1 power point spent, increase the AC bonus by +1 (max +5) or extend the duration by 1 round (max 3 rounds).</p>"
@@ -71,9 +71,9 @@
     }
   },
   {
-    "_id": "mindLinkPower001",
+    "_id": "4e6f0bcb23e14c9d",
     "name": "Mind Link",
-    "type": "spell",
+    "type": "power",
     "system": {
       "description": {
         "value": "<p>You establish a telepathic link with one willing creature within 30 feet, allowing silent communication for 1 minute. Costs 1 power point.</p><p><strong>Enhancement:</strong> For each additional 1 power point spent, increase the duration by 1 minute (max 5 minutes) or target one additional willing creature (max 3 total).</p>"
@@ -84,6 +84,7 @@
         "cost": 1,
         "condition": "Target must be willing"
       },
+      "powerCost": 1,
       "duration": {
         "value": 1,
         "units": "minute"
@@ -103,18 +104,19 @@
     }
   },
   {
-    "_id": "mindProbePower002",
+    "_id": "1ef51a023eac43c8",
     "name": "Mind Probe",
-    "type": "spell",
+    "type": "power",
     "system": {
       "description": {
-        "value": "<p>You probe a creature’s mind within 30 feet, forcing it to make a Wisdom saving throw (DC = 8 + your proficiency bonus + your Intelligence modifier). On a failure, you learn one surface thought or memory. Costs 3 power points.</p><p><strong>Enhancement:</strong> For each additional 2 power points spent, increase the range by 30 feet (max 90 feet) or learn one additional thought or memory from a failed save (max 3 total).</p>"
+        "value": "<p>You probe a creature's mind within 30 feet, forcing it to make a Wisdom saving throw (DC = 8 + your proficiency bonus + your Intelligence modifier). On a failure, you learn one surface thought or memory. Costs 3 power points.</p><p><strong>Enhancement:</strong> For each additional 2 power points spent, increase the range by 30 feet (max 90 feet) or learn one additional thought or memory from a failed save (max 3 total).</p>"
       },
       "level": 0,
       "activation": {
         "type": "action",
         "cost": 1
       },
+      "powerCost": 3,
       "target": {
         "type": "creature",
         "value": 1

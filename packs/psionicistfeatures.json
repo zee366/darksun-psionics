@@ -101,6 +101,7 @@
       },
       "source": "Dark Sun Psionics Module",
       "activation": { "type": "action", "cost": 1 },
+      "powerCost": 5,
       "target": { "type": "creature", "value": 1 },
       "range": { "value": 60, "units": "feet" },
       "actionType": "save",
@@ -118,6 +119,7 @@
       },
       "source": "Dark Sun Psionics Module",
       "activation": { "type": "bonus", "cost": 1 },
+      "powerCost": 3,
       "target": { "type": "creature", "value": 1 },
       "range": { "value": 30, "units": "feet" },
       "duration": { "value": 1, "units": "round" },
@@ -145,7 +147,8 @@
         "value": "<p>Spend 1 PP to ignore difficult terrain or gain a 10-foot fly speed until the end of your turn (no concentration).</p>"
       },
       "source": "Dark Sun Psionics Module",
-      "activation": { "type": "bonus", "cost": 1 }
+      "activation": { "type": "bonus", "cost": 1 },
+      "powerCost": 1
     }
   },
   {
@@ -244,6 +247,7 @@
       },
       "source": "Dark Sun Psionics Module",
       "activation": { "type": "action", "cost": 1 },
+      "powerCost": 20,
       "duration": { "value": 1, "units": "minute" },
       "uses": { "value": 1, "max": 1, "per": "lr" }
     }
@@ -270,9 +274,10 @@
     "type": "feat",
     "system": {
       "description": {
-        "value": "<p>You overwhelm multiple minds with telepathic whispers. As an action, spend 5 power points to target up to 5 creatures you can see within 60 feet. Each must make a Wisdom saving throw (DC = 8 + your proficiency bonus + your Wisdom modifier). On a failed save, a creature is incapacitated until the end of its next turn. On a successful save, it is unaffected.</p><p>You can spend an additional 2 power points per extra target to increase the number of targets (maximum 10 targets).</p><p>Once you use this feature, you can’t use it again until you finish a short or long rest.</p>"
+        "value": "<p>You overwhelm multiple minds with telepathic whispers. As an action, spend 5 power points to target up to 5 creatures you can see within 60 feet. Each must make a Wisdom saving throw (DC = 8 + your proficiency bonus + your Wisdom modifier). On a failed save, a creature is incapacitated until the end of its next turn. On a successful save, it is unaffected.</p><p>You can spend an additional 2 power points per extra target to increase the number of targets (maximum 10 targets).</p><p>Once you use this feature, you can't use it again until you finish a short or long rest.</p>"
       },
       "activation": { "type": "action", "cost": 1 },
+      "powerCost": 5,
       "duration": { "value": 1, "units": "round" },
       "target": { "value": 5, "units": "", "type": "creature" },
       "range": { "value": 60, "long": null, "units": "ft" },
@@ -289,7 +294,8 @@
       "description": {
         "value": "<p>You attempt to control one creature within 60 feet. It must succeed on a DC 15 Wisdom saving throw (DC = 8 + your Intelligence modifier + proficiency bonus) or be charmed and obey your mental commands for 1 hour. Costs 10 Power Points.</p>"
       },
-      "activation": { "type": "action", "cost": 10 },
+      "activation": { "type": "action", "cost": 1 },
+      "powerCost": 10,
       "target": { "type": "creature", "value": 1, "range": 60 },
       "duration": { "value": 1, "units": "hour" },
       "save": { "ability": "wis", "dc": 15 }
@@ -303,7 +309,8 @@
       "description": {
         "value": "<p>You link up to 10 willing creatures within 120 feet into a telepathic network, allowing all to communicate silently for 8 hours. Costs 14 Power Points.</p>"
       },
-      "activation": { "type": "action", "cost": 14, "condition": "Targets must be willing" },
+      "activation": { "type": "action", "cost": 1, "condition": "Targets must be willing" },
+      "powerCost": 14,
       "target": { "type": "creature", "value": 10, "range": 120 },
       "duration": { "value": 8, "units": "hour" }
     }
@@ -316,7 +323,8 @@
       "description": {
         "value": "<p>You dominate up to 5 creatures within 120 feet. Each must succeed on a DC 17 Wisdom saving throw (DC = 8 + your Intelligence modifier + proficiency bonus) or be charmed and obey you for 1 hour. Costs 18 Power Points.</p>"
       },
-      "activation": { "type": "action", "cost": 18 },
+      "activation": { "type": "action", "cost": 1 },
+      "powerCost": 18,
       "target": { "type": "creature", "value": 5, "range": 120 },
       "duration": { "value": 1, "units": "hour" },
       "save": { "ability": "wis", "dc": 17 }
@@ -331,6 +339,7 @@
         "value": "<p>You push a Medium or smaller object or creature up to 10 feet away. Costs 1 Power Point.</p>"
       },
       "activation": { "type": "action", "cost": 1 },
+      "powerCost": 1,
       "target": { "type": "creature", "value": 1, "range": 10 }
     }
   },
@@ -342,7 +351,8 @@
       "description": {
         "value": "<p>You lift an object up to 50 lbs within 30 feet and move it up to 15 feet. Costs 3 Power Points.</p>"
       },
-      "activation": { "type": "action", "cost": 3 },
+      "activation": { "type": "action", "cost": 1 },
+      "powerCost": 3,
       "target": { "type": "object", "value": 1, "range": 30 }
     }
   },
@@ -354,7 +364,8 @@
       "description": {
         "value": "<p>You create a 10-foot-square wall of force within 60 feet, lasting 1 minute. Costs 6 Power Points.</p>"
       },
-      "activation": { "type": "action", "cost": 6 },
+      "activation": { "type": "action", "cost": 1 },
+      "powerCost": 6,
       "duration": { "value": 1, "units": "minute" },
       "range": { "value": 60, "units": "feet" }
     }
@@ -367,7 +378,8 @@
       "description": {
         "value": "<p>You crush a creature within 60 feet, dealing 4d6 bludgeoning damage (DC 15 Str save half, DC = 8 + Int + prof). Costs 10 Power Points.</p>"
       },
-      "activation": { "type": "action", "cost": 10 },
+      "activation": { "type": "action", "cost": 1 },
+      "powerCost": 10,
       "target": { "type": "creature", "value": 1, "range": 60 },
       "save": { "ability": "str", "dc": 15 }
     }
@@ -380,7 +392,8 @@
       "description": {
         "value": "<p>You gain a flying speed of 60 feet for 10 minutes. Costs 14 Power Points.</p>"
       },
-      "activation": { "type": "action", "cost": 14 },
+      "activation": { "type": "action", "cost": 1 },
+      "powerCost": 14,
       "duration": { "value": 10, "units": "minute" }
     }
   },
@@ -392,7 +405,8 @@
       "description": {
         "value": "<p>You unleash a 20-foot-radius storm of force within 120 feet, dealing 10d6 bludgeoning damage to all creatures (DC 17 Dex save half, DC = 8 + Int + prof). Costs 18 Power Points.</p>"
       },
-      "activation": { "type": "action", "cost": 18 },
+      "activation": { "type": "action", "cost": 1 },
+      "powerCost": 18,
       "target": { "type": "sphere", "value": 20, "range": 120 },
       "save": { "ability": "dex", "dc": 17 }
     }

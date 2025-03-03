@@ -1,0 +1,41 @@
+<form class="{{cssClass}}" autocomplete="off">
+  <header class="sheet-header">
+    <h1><input name="name" type="text" value="{{item.name}}" placeholder="Power Name"></h1>
+  </header>
+  <section class="sheet-body">
+    <div>
+      <label>Power Point Cost</label>
+      <input name="data.powerCost" type="number" value="{{data.powerCost}}" min="0">
+    </div>
+    <div>
+      <label>Description</label>
+      <textarea name="data.description">{{data.description}}</textarea>
+    </div>
+    <div>
+      <label>Activation</label>
+      <select name="data.activation.type">
+        {{#select data.activation.type}}
+          <option value="action">Action</option>
+          <option value="bonus">Bonus Action</option>
+          <option value="reaction">Reaction</option>
+        {{/select}}
+      </select>
+      <input name="data.activation.cost" type="number" value="{{data.activation.cost}}" min="1">
+    </div>
+    <div>
+      <label>Range</label>
+      <input name="data.range.value" type="number" value="{{data.range.value}}">
+      <select name="data.range.units">
+        {{#select data.range.units}}
+          <option value="ft">Feet</option>
+          <option value="mi">Miles</option>
+        {{/select}}
+      </select>
+    </div>
+    <div>
+      <label>Target</label>
+      <input name="data.target.value" type="number" value="{{data.target.value}}">
+      <input name="data.target.type" type="text" value="{{data.target.type}}">
+    </div>
+  </section>
+</form>

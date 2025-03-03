@@ -1,7 +1,7 @@
 Hooks.once("init", async () => {
   // Define the new "power" item type
   console.log("[Dark Sun] Create power item type")
-  CONFIG.Item.documentClass.types.add("power");
+  CONFIG.Item.documentClass.TYPES.push("power");
   CONFIG.Item.dataModels["power"] = class PowerData extends foundry.abstract.DataModel {
     static defineSchema() {
       const fields = foundry.data.fields;

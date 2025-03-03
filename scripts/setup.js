@@ -1,5 +1,6 @@
 Hooks.once("init", async () => {
   // Define the new "power" item type
+  console.log("[Dark Sun] Create power item type")
   CONFIG.Item.documentClass.types.push("power");
   CONFIG.Item.dataModels["power"] = class PowerData extends foundry.abstract.DataModel {
     static defineSchema() {
@@ -37,7 +38,7 @@ Hooks.once("init", async () => {
 
 Hooks.once("ready", async () => {
   if (!game.user.isGM) {
-    console.log("Skipping compendium population - not GM.");
+    console.log("[Dark Sun] Skipping compendium population - not GM.");
     return;
   }
 
@@ -51,28 +52,28 @@ Hooks.once("ready", async () => {
   for (const { key, path } of packs) {
     const pack = game.packs.get(key);
     if (!pack) {
-      console.error(`Pack ${key} not found in game.packs! Check module.json or file placement.`);
+      console.error(`[Dark Sun] Pack ${key} not found in game.packs! Check module.json or file placement.`);
       continue;
     }
     if (pack.index.size === 0) {
       if (pack.locked) {
         await pack.configure({ locked: false });
-        console.log(`Unlocked compendium ${key} for population.`);
+        console.log(`[Dark Sun] Unlocked compendium ${key} for population.`);
       }
       const response = await fetch(`./modules/darksun-psionics/${path}`);
       if (!response.ok) {
-        console.error(`Failed to fetch ${path}:`, response.statusText);
+        console.error(`[Dark Sun] Failed to fetch ${path}:`, response.statusText);
         continue;
       }
       const data = await response.json();
-      console.log(`JSON data to import for ${key}:`, data.map(d => ({ _id: d._id, name: d.name })));
+      console.log(`[Dark Sun] JSON data to import for ${key}:`, data.map(d => ({ _id: d._id, name: d.name })));
       await Item.createDocuments(data, { pack: key, keepId: true });
       await pack.getIndex({ force: true });
-      console.log(`${key} populated with data! Index size:`, pack.index.size);
+      console.log(`[Dark Sun] ${key} populated with data! Index size:`, pack.index.size);
       await pack.configure({ locked: true });
-      console.log(`Re-locked compendium ${key} after population.`);
+      console.log(`[Dark Sun] Re-locked compendium ${key} after population.`);
     } else {
-      console.log(`${key} already populated. Index size:`, pack.index.size);
+      console.log(`[Dark Sun] ${key} already populated. Index size:`, pack.index.size);
     }
   }
 });
@@ -91,7 +92,7 @@ Hooks.on("createItem", async (item, options, userId) => {
         lr: false
       }
     });
-    console.log(`Set Power Points to ${powerPoints} for ${actor.name}`);
+    console.log(`[Dark Sun] Set Power Points to ${powerPoints} for ${actor.name}`);
 
     // Skill Selection Prompt
     // const skillChoices = ["arcana", "history", "insight", "investigation", "perception", "persuasion"];
@@ -258,21 +259,21 @@ Hooks.on("updateItem", async (item, updateData, options, userId) => {
     await actor.update({
       "system.resources.primary.max": powerPoints
     });
-    console.log(`Updated Power Points max to ${powerPoints} for ${actor.name} at level ${newLevel}`);
+    console.log(`[Dark Sun] Updated Power Points max to ${powerPoints} for ${actor.name} at level ${newLevel}`);
 
     const featurePack = game.packs.get("darksun-psionics.features");
     const subclass = actor.items.find(i => i.type === "subclass" && i.system.classIdentifier === "psionicist");
     if (subclass) {
       const advancements = subclass.system.advancement.filter(a => a.type === "ItemGrant" && a.level <= newLevel);
-      console.log("Advancements to apply:", advancements);
+      console.log("[Dark Sun] Advancements to apply:", advancements);
       const itemsToGrant = advancements.flatMap(a => a.configuration.items.map(item => item.uuid));
-      console.log("Items to grant (UUIDs):", itemsToGrant);
+      console.log("[Dark Sun] Items to grant (UUIDs):", itemsToGrant);
       const existingItems = actor.items
         .filter(i => i.type === "feat")
         .map(i => i.flags.core?.sourceId?.split(".").pop());
-      console.log("Existing item IDs (sourceId):", existingItems);
+      console.log("[Dark Sun] Existing item IDs (sourceId):", existingItems);
       const itemsToAdd = itemsToGrant.filter(id => !existingItems.includes(id));
-      console.log("Items to add (filtered):", itemsToAdd);
+      console.log("[Dark Sun] Items to add (filtered):", itemsToAdd);
       if (itemsToAdd.length > 0) {
         await featurePack.getIndex({ force: true });
         const items = [];
@@ -286,15 +287,15 @@ Hooks.on("updateItem", async (item, updateData, options, userId) => {
             items.push(itemData);
           }
         }
-        console.log("Fetched items:", items.map(i => i.name));
+        console.log("[Dark Sun] Fetched items:", items.map(i => i.name));
         if (items.length > 0) {
           await actor.createEmbeddedDocuments("Item", items);
-          console.log(`Granted ${items.length} new items for ${subclass.name} up to level ${newLevel}`);
+          console.log(`[Dark Sun] Granted ${items.length} new items for ${subclass.name} up to level ${newLevel}`);
         } else {
-          console.log("No items fetched for granted UUIDs:", itemsToAdd);
+          console.log("[Dark Sun] No items fetched for granted UUIDs:", itemsToAdd);
         }
       } else {
-        console.log(`No new items to grant for ${subclass.name} at level ${newLevel}`);
+        console.log(`[Dark Sun] No new items to grant for ${subclass.name} at level ${newLevel}`);
       }
     }
     if (actor.sheet) actor.sheet.render(true);

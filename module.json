@@ -2,7 +2,7 @@
   "id": "darksun-psionics",
   "title": "Dark Sun Psionics",
   "description": "A module for Foundry VTT that adds psionics from AD&D 2nd Edition's Dark Sun setting to D&D 5th Edition, including the Psionicist class, psionic powers, and Wild Talents.",
-  "version": "0.1.0",
+  "version": "dev",
   "authors": [
     {
       "name": "Jason Brennan",
@@ -32,6 +32,13 @@
   "styles": [
     "styles/darksun-psionics.css"
   ],
+  "documentTypes": {
+    "Item": {
+      "power": {
+        "htmlFields": ["description.value", "description.chat"]
+      }
+    }
+  },
   "packs": [
     {
       "name": "psionicist",

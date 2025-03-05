@@ -1,4 +1,47 @@
-Hooks.once("init", async () => {
+// Hooks.once("init", async () => {
+//   // Define the new "power" item type
+//   console.log("[Dark Sun] Create power item type")
+//   CONFIG.Item.documentClass.TYPES.push("power");
+//   CONFIG.Item.dataModels["power"] = class PowerData extends foundry.abstract.DataModel {
+//     static defineSchema() {
+//       const fields = foundry.data.fields;
+//       return {
+//         description: new fields.HTMLField({ required: true, blank: true }),
+//         activation: new fields.SchemaField({
+//           type: new fields.StringField({ initial: "action" }),
+//           cost: new fields.NumberField({ required: true, initial: 1, integer: true })
+//         }),
+//         range: new fields.SchemaField({
+//           value: new fields.NumberField({ initial: 30, integer: true }),
+//           units: new fields.StringField({ initial: "ft" })
+//         }),
+//         target: new fields.SchemaField({
+//           value: new fields.NumberField({ initial: 1, integer: true }),
+//           type: new fields.StringField({ initial: "creature" })
+//         }),
+//         powerCost: new fields.NumberField({ required: true, initial: 1, min: 0, integer: true }), // Power point cost
+//         damage: new fields.ArrayField(
+//           new fields.ArrayField(new fields.StringField())
+//         ),
+//         source: new fields.StringField({ initial: "Psionicist Powers" })
+//       };
+//     }
+//   };
+
+//   // Optionally, register a custom sheet for powers (basic for now)
+//   Items.registerSheet("dnd5e", class PowerSheet extends ItemSheet {
+//     get template() {
+//       return `/modules/darksun-psionics/templates/power-sheet.hbs`;
+//     }
+//   }, { types: ["power"], label: "Power Sheet" });
+// });
+
+Hooks.once("ready", async () => {
+  if (!game.user.isGM) {
+    console.log("[Dark Sun] Skipping compendium population - not GM.");
+    return;
+  }
+
   // Define the new "power" item type
   console.log("[Dark Sun] Create power item type")
   CONFIG.Item.documentClass.TYPES.push("power");
@@ -34,13 +77,6 @@ Hooks.once("init", async () => {
       return `/modules/darksun-psionics/templates/power-sheet.hbs`;
     }
   }, { types: ["power"], label: "Power Sheet" });
-});
-
-Hooks.once("ready", async () => {
-  if (!game.user.isGM) {
-    console.log("[Dark Sun] Skipping compendium population - not GM.");
-    return;
-  }
 
   const packs = [
     { key: "darksun-psionics.psionicist", path: "packs/psionicist.json" },

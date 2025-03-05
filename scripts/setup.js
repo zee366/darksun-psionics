@@ -50,14 +50,23 @@ Hooks.once("ready", async () => {
       const fields = foundry.data.fields;
       return {
         description: new fields.HTMLField({ required: true, blank: true }),
+        level: new fields.NumberField({ required: true, initial: 0, integer: true }),
         activation: new fields.SchemaField({
           type: new fields.StringField({ initial: "action" }),
           cost: new fields.NumberField({ required: true, initial: 1, integer: true })
+        }),
+        duration: new fields.SchemaField({
+          value: new fields.NumberField({ initial: 1, integer: true }),
+          units: new fields.StringField({ initial: "minute" })
         }),
         range: new fields.SchemaField({
           value: new fields.NumberField({ initial: 30, integer: true }),
           units: new fields.StringField({ initial: "ft" })
         }),
+        preparation: new fields.SchemaField({
+          mode: new fields.StringField({ initial: "innate" })
+        }),
+        actionType: new fields.StringField({ initial: "utility" }),
         target: new fields.SchemaField({
           value: new fields.NumberField({ initial: 1, integer: true }),
           type: new fields.StringField({ initial: "creature" })

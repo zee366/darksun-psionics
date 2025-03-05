@@ -14,7 +14,9 @@
       "duration": { "value": 1, "units": "minute" },
       "range": { "value": 30, "units": "ft" },
       "preparation": { "mode": "innate" },
-      "actionType": "utility"
+      "actionType": "utility",
+      "damage": [],
+      "source": "Psionicist Powers"
     }
   },
   {

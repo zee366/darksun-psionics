@@ -80,6 +80,12 @@ Hooks.once("ready", async () => {
     }
   };
 
+  // Register the custom sheet
+  DocumentSheetConfig.registerSheet(Actor, "dnd5e", PsionicistSheet, {
+    types: ["character"],
+    label: "Dark Sun Psionicist Sheet"
+  });
+
   // Optionally, register a custom sheet for powers (basic for now)
   Items.registerSheet("dnd5e", class PowerSheet extends ItemSheet {
     get template() {

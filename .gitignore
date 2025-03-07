@@ -3,6 +3,13 @@ Data/
 world/
 *.db
 
+# Generated pack data
+packs/powers/
+packs/psionicist
+packs/psionicistfeatures
+packs/psionicistsubclasses
+packs/wildtalents
+
 # Node.js / JavaScript
 node_modules/
 *.log

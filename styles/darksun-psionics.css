@@ -1,3 +1,5 @@
+@import url("/systems/dnd5e/dnd5e.css");
+
 .meter.sectioned.power-points .progress.power-points::before {
     background: linear-gradient(to right, #1e90ff 0%, #87cefa 100%) !important;
     border-inline-end: 1px solid #0000ff !important;

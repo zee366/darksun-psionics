@@ -111,16 +111,16 @@ class PsionicistSheet extends dnd5e.applications.actor.ActorSheet5eCharacter2 {
     this._tabs?.forEach(tabGroup => tabGroup.bind(html[0]));
 
     // Edit and delete controls (handled by <dnd5e-inventory>)
-    // html.find('.item-control[data-action="edit"]').click(event => {
-    //   const itemId = event.currentTarget.closest('[data-item-id]').dataset.itemId;
-    //   const item = this.actor.items.get(itemId);
-    //   if (item) item.sheet.render(true);
-    // });
+    html.find('.item-control[data-action="edit"]').click(event => {
+      const itemId = event.currentTarget.closest('[data-item-id]').dataset.itemId;
+      const item = this.actor.items.get(itemId);
+      if (item) item.sheet.render(true);
+    });
 
-    // html.find('.item-control[data-action="delete"]').click(event => {
-    //   const itemId = event.currentTarget.closest('[data-item-id]').dataset.itemId;
-    //   if (itemId) this.actor.deleteEmbeddedDocuments("Item", [itemId]);
-    // });
+    html.find('.item-control[data-action="delete"]').click(event => {
+      const itemId = event.currentTarget.closest('[data-item-id]').dataset.itemId;
+      if (itemId) this.actor.deleteEmbeddedDocuments("Item", [itemId]);
+    });
   }
 
   _filterItems(items, filters, collection) {

@@ -27,8 +27,8 @@
     ]
   },
   "esmodules": [
-    "scripts/setup.js",
-    "scripts/sheets/psionicistSheet.js"
+    "scripts/sheets/psionicistSheet.js",
+    "scripts/setup.js"
   ],
   "styles": [
     "styles/darksun-psionics.css"

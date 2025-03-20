@@ -104,6 +104,15 @@ class PsionicistSheet extends dnd5e.applications.actor.ActorSheet5eCharacter2 {
         spellsTab.find("i").removeClass("fas fa-book").addClass("fas fa-brain");
       }
     }
+
+    const powersList = html.find('.powers-list');
+    if (powersList.length) {
+      console.log("[PsionicistSheet] Powers List HTML After Render:", powersList.html());
+      const inventoryElement = html.find('dnd5e-inventory[data-collection="powerbook"]')[0];
+      if (inventoryElement && this._filters.powerbook) {
+        inventoryElement._applyFilters(this._filters.powerbook);
+      }
+    }
   }
 
   activateListeners(html) {
@@ -124,13 +133,14 @@ class PsionicistSheet extends dnd5e.applications.actor.ActorSheet5eCharacter2 {
   }
 
   _filterItems(items, filters, collection) {
+    console.log("[PsionicistSheet] Filter Called - Collection:", collection, "Filters:", filters, "Search:", this._filters.powerbook.name);
     if (collection !== "powerbook") return items;
     const powers = this.actor.items
       .filter(item => item?.type === "darksun-psionics.power" && item?.name && typeof item.name === "string");
-    if (!filters || !filters.size) return powers;
-    return powers.filter(item => {
-      const nameMatch = !this._filters.powerbook.name || item.name.toLowerCase().includes(this._filters.powerbook.name.toLowerCase());
-      const propMatch = Array.from(filters).every(filter => {
+    const searchTerm = this._filters.powerbook.name?.toLowerCase() || "";
+    const filtered = powers.filter(item => {
+      const nameMatch = !searchTerm || item.name.toLowerCase().includes(searchTerm);
+      const propMatch = !filters?.size || Array.from(filters).every(filter => {
         switch (filter) {
           case "action": return item.system.activation?.type === "action";
           case "bonus": return item.system.activation?.type === "bonus";
@@ -138,8 +148,10 @@ class PsionicistSheet extends dnd5e.applications.actor.ActorSheet5eCharacter2 {
           default: return true;
         }
       });
+      console.log("[PsionicistSheet] Item:", item.name, "Name Match:", nameMatch, "Prop Match:", propMatch);
       return nameMatch && propMatch;
     });
+    return filtered;
   }
 }
 

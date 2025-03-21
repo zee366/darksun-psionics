@@ -79,13 +79,6 @@ class PsionicistSheet extends dnd5e.applications.actor.ActorSheet5eCharacter2 {
       }];
       data.collections = data.collections || {};
       data.collections.powerbook = powers;
-
-      // data.inventory = data.inventory || [];
-      // data.inventory.push({
-      //   label: "DSPSIONICS.Powers",
-      //   items: powers,
-      //   dataset: { type: "power" }
-      // });
     }
 
     return data;
@@ -132,24 +125,26 @@ class PsionicistSheet extends dnd5e.applications.actor.ActorSheet5eCharacter2 {
     });
   }
 
+  _filterChildren(collection, filters) {
+    switch ( collection ) {
+      case "powerbook": return this._filterItems(this.actor.items, filters, collection);
+      default: return super._filterChildren(collection, filters);
+    }
+  }
+
   _filterItems(items, filters, collection) {
-    console.log("[PsionicistSheet] Filter Called - Collection:", collection, "Filters:", filters, "Search:", this._filters.powerbook.name);
-    if (collection !== "powerbook") return items;
-    const powers = this.actor.items
-      .filter(item => item?.type === "darksun-psionics.power" && item?.name && typeof item.name === "string");
-    const searchTerm = this._filters.powerbook.name?.toLowerCase() || "";
-    const filtered = powers.filter(item => {
-      const nameMatch = !searchTerm || item.name.toLowerCase().includes(searchTerm);
-      const propMatch = !filters?.size || Array.from(filters).every(filter => {
-        switch (filter) {
-          case "action": return item.system.activation?.type === "action";
-          case "bonus": return item.system.activation?.type === "bonus";
-          case "reaction": return item.system.activation?.type === "reaction";
-          default: return true;
-        }
-      });
-      console.log("[PsionicistSheet] Item:", item.name, "Name Match:", nameMatch, "Prop Match:", propMatch);
-      return nameMatch && propMatch;
+    const actions = ["action", "bonus", "reaction"];
+
+    if (!collection || collection !== "powerbook") return super._filterItems(items, filters);
+
+    const filtered = items.filter(item => {
+      if (item.type !== "darksun-psionics.power") return false;
+      for ( const f of actions ) {
+        if ( !filters.has(f) ) continue;
+        if ( item.system.activation.type !== f ) return false;
+        continue;
+      }
+      return true;
     });
     return filtered;
   }

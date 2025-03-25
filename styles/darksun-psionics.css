@@ -4,3 +4,36 @@
     background: linear-gradient(to right, #1e90ff 0%, #87cefa 100%) !important;
     border-inline-end: 1px solid #0000ff !important;
 }
+
+/* Powers List Styling */
+.powers-list {
+    /* Inherit defaults, add psionic flavor */
+    --power-color: #1e90ff; /* Base psionic blue */
+}
+
+.powers-list .items-header {
+    background: linear-gradient(to right, var(--power-color), #87cefa);
+    color: white; /* Contrast for readability */
+    border-bottom: 1px solid #0000ff;
+}
+
+.powers-list .item:hover {
+    background: rgba(30, 144, 255, 0.1); /* Light psionic hover */
+}
+
+.powers-list .item-name {
+    font-weight: bold; /* Emphasize power names */
+}
+
+.powers-list .item-detail {
+    min-width: 60px; /* Ensure columns don’t collapse */
+    text-align: center; /* Align numbers cleanly */
+}
+
+.powers-list .item-controls a {
+    color: var(--power-color); /* Match psionic theme */
+}
+
+.powers-list .item-controls a:hover {
+    color: #87cefa; /* Lighter hover */
+}

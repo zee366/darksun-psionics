@@ -2,5 +2,6 @@
     "DSPSIONICS.Psionicist": "Psionicist",
     "DSPSIONICS.PSPs": "Psionic Strength Points",
     "DSPSIONICS.Powers": "Powers",
-    "DSPSIONICS.PowersSearch": "Search Powers"
+    "DSPSIONICS.PowersSearch": "Search Powers",
+    "DSPSIONICS.PowerCost": "Power Cost"
 }
